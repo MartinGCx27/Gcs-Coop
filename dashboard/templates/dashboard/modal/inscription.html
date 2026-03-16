@@ -1,0 +1,136 @@
+<div class="modal fade" id="modalinscription" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Inscripción</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section id="datos_ingreso">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item active" aria-current="page">Hola {{request.user.get_full_name}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    {% comment %} <div class="col">
+                        <label>Selecciona tu plan de pago de inscripción:</label>
+                        <select id="select_inscription" class="form-control">
+                            <option selected>Selecciona una opción</option>
+                            <option value="1">1 exhibición</option>
+                            <option value="2">2 exhibiciónes</option>
+                            <option value="3">12 exhibiciónes</option>
+                        </select>
+                    </div>  {% endcomment %}
+                    <div class="col">
+                      <div  class="alert alert-info" role="alert"> 
+                        <p class="">Tu aportación correspondiente para la inscripción es de $5000.</p>
+                        <small>El pago con tarjeta genera una comisión del 3%</small>
+                      </div>
+                    </div>
+                    {% comment %} <div class="col">
+                      <div  id="label_monto" class="mt-4 alert" role="alert"> 
+                      </div>
+                    </div> {% endcomment %}
+                </div>
+                <!--Mensaje de direccionamiento exitoso-->
+                <div id="alert_highway_inscription" class="alert alert-success mt-4" role="alert">
+                    <h4 class="alert-heading">¡Todo listo!</h4>
+                    <p>Si ya has realizado el pago de tu inscripción, ya puedes dar clic en el botón <b>Cerrar</b> y continuar explorando todos los beneficios que GCS-COOP ofrece para ti.</p>
+                    <p>Si aún no conoces todos los beneficios puedes consultarlos dando clic <a href="{% url 'benefits' %}">aquí</a></p>
+                </div>
+            </div>
+
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <a id="btn_highway" type="button" class="btn btn-primary" href="https://buy.stripe.com/fZedTw5GZft15UI6p3" target="_blank">Pagar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  $(document).ready(function (){
+    var alert_highway_inscription = $('#alert_highway_inscription')
+    var btn_highway = $('#btn_highway')
+    alert_highway_inscription.hide()
+    //btn_highway.classList.remove('btn-primary')
+    //btn_highway.classList.add('btn-danger')
+    //$('#btn_highway').css({'pointer-events': 'none'})
+    //$('#btn_highway').css({'pointer-events': ''})
+
+  });
+
+   $('#btn_highway').on('click', function () {
+      var alert_highway_inscription = $('#alert_highway_inscription')
+     alert_highway_inscription.show()
+     });
+
+  /* $(function (){
+    $('#select_inscription').on('change', function (){
+      var monto = $('#select_inscription').val();
+      var label_monto = document.getElementById('label_monto')
+      var btn_highway = document.getElementById('btn_highway')
+
+      if (monto == 1) {
+        label_monto.classList.add('alert-primary')
+        btn_highway.classList.remove('btn-danger')
+        btn_highway.classList.add('btn-primary')
+        label_monto.innerHTML = ''
+        label_monto.append('Monto: $5000.00')
+        $('#btn_highway').css({'pointer-events': ''})
+        
+        btn_highway.setAttribute('href', 'https://buy.stripe.com/test_6oE3dBcUY1mLfK0eUV')
+
+      }
+      else if (monto == 2) {
+        label_monto.classList.add('alert-primary')
+        btn_highway.classList.remove('btn-danger')
+        btn_highway.classList.add('btn-primary')
+        label_monto.innerHTML = ''
+        label_monto.append('Monto: $2500.00')
+        $('#btn_highway').css({'pointer-events': ''})
+
+        btn_highway.setAttribute('href', 'https://buy.stripe.com/test_28o5lJ3kod5t69q8wA')
+      }
+      else if (monto == 3) {
+        label_monto.classList.add('alert-primary')
+        btn_highway.classList.remove('btn-danger')
+        btn_highway.classList.add('btn-primary')
+        label_monto.innerHTML = ''
+        label_monto.append('Monto: $520.00')
+        $('#btn_highway').css({'pointer-events': ''})
+
+        btn_highway.setAttribute('href', 'https://buy.stripe.com/test_9AQ5lJ3ko6H5fK0005')
+      }
+      else {
+        label_monto.innerHTML = ''
+        label_monto.classList.remove('alert-primary')
+        btn_highway.setAttribute('href', '#')
+        btn_highway.classList.remove('btn-primary')
+        btn_highway.classList.add('btn-danger')
+
+        $('#btn_highway').css({'pointer-events': 'none'})
+      }
+      
+    });  
+    
+    /$('#btn_highway').on('click', function () {
+      var alert_highway_inscription = $('#alert_highway_inscription')
+      alert_highway_inscription.show()
+    });
+
+    */
+
+  // });
+</script>

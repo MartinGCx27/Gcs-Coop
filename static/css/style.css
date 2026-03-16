@@ -1,0 +1,250 @@
+/******Header******/
+/*Navbar*/
+#nav_logo{
+    height: 50px;
+}
+.access_vip{
+    color: cadetblue !important;
+}
+.access_vip:hover{
+    transition: 0.2s;
+    color: red !important;
+}
+
+/******Main******/
+/*Home*/
+main .carousel-item img{
+    max-height: 70vh;
+    object-fit: cover;
+    /*filter: grayscale(70%);*/
+}
+#museum{
+    max-height: 70vh;
+    object-fit: cover;
+   /* filter: grayscale(70%);*/
+   filter: brightness(145%) sepia(40%) blur(2px);
+}
+#carousel{
+    position: relative;
+}
+#carousel .overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    /*background-color: rgba(0, 0, 0, 0.5);*/
+    color: black;
+}
+#services img{
+    max-height: 200px;
+}
+
+/*Filosofy*/
+#h1_us{
+    margin-top: 5vh;
+    font-size: 12vh;
+}
+.p_us{
+    margin-top: 5vh;
+}
+#img_us{
+    max-height: 70vh;
+    object-fit: cover;
+    height: 55vh;
+    object-position: 100% 0%;
+    filter: grayscale(80%);
+}
+
+#img_filosofy{
+    position: relative;
+    max-height: 200vh;
+    padding-up: 50vh;
+    width: 190vh;
+    height: 53vh;
+    object-fit: cover;
+    object-position: 100% 0%;
+    filter: grayscale(40%);
+}
+.overlay_filosofy{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    color: white;
+    text-align: left;
+    font-size: 4 rem;
+}
+
+/*Magazine*/
+#img_magazine{
+    display: block;
+    margin: auto;
+    height: 90vh;
+}
+
+/*Proceso de inscripcion*/
+.step-card{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+}
+
+#last_step{
+    transition: 0.5s;
+}
+
+#last_step:hover{
+    box-shadow: 0px 15px 15px -5px black;
+}
+
+
+/*Módulos en construcción*/
+#img_work{
+    max-height: 70vh;
+    position: relative;
+    object-fit: cover;
+    filter: grayscale(70%);
+}
+.overlay_w{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+/*Imagenes de Promotor*/
+#img_prom1{
+    max-height: 60vh;
+    object-fit: cover;
+    filter: brightness(120%) grayscale(15%);
+}
+
+#img_prom2{
+    max-height: 60vh;
+    object-fit: cover;
+    filter: brightness(90%) grayscale(18%);
+}
+
+#img_prom3{
+    max-height: 60vh;
+    object-fit: cover;
+    filter: grayscale(18%);
+}
+
+#img_prom4{
+    max-height: 60vh;
+    object-fit: cover;
+    filter: brightness(110%);
+}
+
+/*
+#img_promoter{
+    max-height: 80vh;
+    position: relative;
+    object-fit: cover;
+    filter: brightness(50%) grayscale(22%);
+    object-position: 50% 23%;
+}
+*/
+
+/*Imagenes de Páginas oficiales*/
+#img_oficial_pages{
+    position: relative;
+    object-fit: cover;
+    filter: brightness(50%) grayscale(20%);
+}
+
+/*Columnas de Promotor*/
+#col_promoter{
+    padding:0 0 0 0;
+}
+
+/*Overlay de Promotor*/
+.overlay_promoter{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    color: white;
+    text-align: left;
+    font-size: 1.5rem;
+}
+/*Overlay de Páginas oficiales*/
+.overlay_of_pages{
+    position: absolute;
+    top: 5vh;
+    margin-top: 0cm;
+    padding-top: 28vh;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    color: white;
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.table_text{
+font-size: 1rem !important;
+}
+
+/*Footer*/
+#footer_logo{
+    height: 20vh;
+}
+#footer{
+    background-color: black;
+    padding: 15px;
+    text-align: center;
+}
+#footer h5{
+    color: white;
+}
+#footer a,
+#footer p,
+#footer ul{
+    text-decoration: none;
+    color: white;
+}
+#list_footer{
+    list-style: none;
+}
+#footer h5:hover{
+    transition: .5s;
+    color: gold;
+}
+
+/*Elements modify*/
+#step1{
+    background-color: #f9fbfa;
+}
+#step2{
+    background-color: #f4f4f4;
+}
+#step3{
+    background-color: #f9fbfa;
+}
+#step4{
+    background-color: #f4f4f4;
+}
+
+/*Image service*/
+#service_id{
+    width: 60px;
+    height: 60px;
+}
+
+/*Material*/
+.materiald{
+    box-shadow: 0px 10px 10px -5px gray;
+}
+
+/*
+El mamawebazo mama su webo
+*/

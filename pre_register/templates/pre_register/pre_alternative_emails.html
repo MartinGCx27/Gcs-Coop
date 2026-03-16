@@ -1,0 +1,57 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Correos alternativos
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Correos alternativos</h1>
+                      <p class="lead">Ingresa el correo alternativo del nuevo socio, si no quieres ingresar un correo alternativo, puedes saltar este paso y llenarlo después.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label hidden>Nombre de usuario</label>
+                            <input hidden type="text" class="form-control" name="user" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-6 col-md-4 col-12">
+                            <label>Ingresa un correo alternativo</label>
+                            <input name="alternative_email" type="email" class="form-control" autocomplete="off">
+                        </div>
+                        <div class="col-lg-6 mt-4">
+                            <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Agregar</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            <a href="{% url 'pre_imss' user.id %}" class="btn btn-outline-warning btn-lg btn-block">Omitir</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Registro personalizado
+{% endblock %}
+
+{% block content %}
+    <section id="register_link">
+        <div class="container-fluid mb-3">
+            <div class="row">
+                <div class="col">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">Código de invitación</h1>
+                            <p class="lead">Genera un código QR o un link de invitación para ingresar nuevos socios a GCS-Coop. Cada que alguien se registre a la plataforma a través de tu enlace quedará registrado con tu información.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-12 mb-3">
+                    <div class="alert alert-info" role="alert">
+                        <img src="/media/{{qr_name}}" class="img-fluid" alt="{{qr_name}}" style="display: block;margin: auto;">
+                    </div>
+                    
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div>
+                        <b>También puedes compartir el link del registro directamente:</b> <button name="copytoclip" type="button" class="badge btn-success">Copiar</button>
+                    </div>
+                    <div id="custom_link" class="alert alert-info" role="alert">{{url_custom}}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--JQuery-->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script>
+        $(function (){
+            $('button[name="copytoclip"]').on('click', function (){
+                var $temp = $("<input>")
+                $("body").append($temp);
+                $temp.val($('#custom_link').text()).select();
+                document.execCommand("copy");
+                $temp.remove();
+                alert('Enlace copiado.')
+            });
+        });
+    </script>
+{% endblock %}

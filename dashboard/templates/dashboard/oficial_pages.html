@@ -1,0 +1,136 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Acceso a paginas oficiales
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid mb-1">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-12 d-block">
+            <img id="img_oficial_pages" src="{% static 'img/oficial_pages_1.jpg' %}" class="img-fluid mb-3"
+                 alt="mature man suited look sraight" data-aos-duration="1500">
+        </div>
+        <div class="overlay_promoter mt-5 col-lg-12 col-md-12 col-lg-12 d-sm-block">
+            <div class="col-lg-12 col-md-12 mt-5 d-flex justify-content-center">
+                <h1 id="h1_filosofy" class="mt-5">Acceso a páginas oficiales</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mb-1 text-center">
+    <div class="row">
+        <div style=" margin: auto;" class="mb-1 col-12 d-lg-none  d-sm-block">
+            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xs">
+                <table class="ul_style_of_pages table table-striped table-dark table-hover table_text">
+                    <thead>
+                    <tr class="table-active ">
+                        <th scope="col">#</th>
+                        <th scope="col">Documento/Ejercicio</th>
+                        <th scope="col">Enlace</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="table-active ">
+                        <th scope="row">1</th>
+                        <td>CURP</td>
+                        <td><a href="https://www.gob.mx/curp/" target="_blank">Visitar</a></td>
+                    </tr>
+                    <tr class="table-active ">
+                        <th scope="row">2</th>
+                        <td>RFC</td>
+                        <td><a href="https://www.mi-rfc.com.mx/consulta-rfc-homoclave" target="_blank">Visitar</a></td>
+                    </tr>
+                    <tr class="table-active ">
+                        <th scope="row">3</th>
+                        <td>Realiza simulación de pensión:</td>
+                        <td><a href="https://tspi.imss.gob.mx/serviciosperifericos-web/servicio/simularPension/inicio"
+                               target="_blank">Visitar</a></td>
+                    </tr>
+                    <tr class="table-active ">
+                        <th scope="row">4</th>
+                        <td>Asignación o localización de NSS (Número de seguridad social</td>
+                        <td><a href="https://serviciosdigitales.imss.gob.mx/gestionAsegurados-web-externo/asignacionNSS"
+                               target="_blank">Visitar</a></td>
+                    </tr>
+                    <tr class="table-active ">
+                        <th scope="row">5</th>
+                        <td>Reporte de semanas cotizadas</td>
+                        <td>
+                            <a href="https://www.gob.mx/tramites/ficha/constancia-de-semanas-reconocidas-en-el-imss/IMSS166"
+                               target="_blank">Visitar</a></td>
+                    </tr>
+                    <tr class="table-active ">
+                        <th scope="row">6</th>
+                        <td>Estado de cuenta de AFORE</td>
+                        <td>
+                            <a href="https://www.e-sar.com.mx/PortalEsar/public/consultaAforeInicio.do"
+                               target="_blank">Visitar</a></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container-fluid mb-1 text-center">
+    <div class="row">
+        <div style=" margin: auto;" class="overlay_of_pages mt-3 mb-1 col-lg-8 col-md-8 col-lg-8 d-none d-lg-block">
+            <table class="ul_style_of_pages table table-striped table-hover">
+                <thead>
+                <tr class="table-active">
+                    <th scope="col">#</th>
+                    <th scope="col">Documento/Ejercicio</th>
+                    <th scope="col">Enlace</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="table-active">
+                    <th scope="row">1</th>
+                    <td>CURP</td>
+                    <td><a href="https://www.gob.mx/curp/" target="_blank">Visitar</a></td>
+                </tr>
+                <tr class="table-active">
+                    <th scope="row">2</th>
+                    <td>RFC</td>
+                    <td><a href="https://www.mi-rfc.com.mx/consulta-rfc-homoclave" target="_blank">Visitar</a></td>
+                </tr>
+                <tr class="table-active">
+                    <th scope="row">3</th>
+                    <td>Realiza simulación de pensión:</td>
+                    <td><a href="https://tspi.imss.gob.mx/serviciosperifericos-web/servicio/simularPension/inicio"
+                           target="_blank">Visitar</a></td>
+                </tr>
+                <tr class="table-active">
+                    <th scope="row">4</th>
+                    <td>Asignación o localización de NSS (Número de seguridad social</td>
+                    <td><a href="https://serviciosdigitales.imss.gob.mx/gestionAsegurados-web-externo/asignacionNSS"
+                           target="_blank">Visitar</a></td>
+                </tr>
+                <tr class="table-active">
+                    <th scope="row">5</th>
+                    <td>Reporte de semanas cotizadas</td>
+                    <td><a href="https://www.gob.mx/tramites/ficha/constancia-de-semanas-reconocidas-en-el-imss/IMSS166"
+                           target="_blank">Visitar</a></td>
+                </tr>
+                <tr class="table-active ">
+                        <th scope="row">6</th>
+                        <td>Estado de cuenta de AFORE</td>
+                        <td>
+                            <a href="https://www.e-sar.com.mx/PortalEsar/public/consultaAforeInicio.do"
+                               target="_blank">Visitar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

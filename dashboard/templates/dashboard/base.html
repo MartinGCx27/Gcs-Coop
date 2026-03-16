@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Template tag load static-->
+    {% load static %}
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="{% static 'img/favicon_gcs.png' %}">
+
+    <!--Enlace CSS Bootstrap-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!--Enlace CSS fonts-->
+    <link rel="stylesheet" href="{% static 'css/style_font.css' %}">
+    <!--Enlace CSS local-->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!--Enlace CSS AOS-->
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <!--Enlace CSS Dropdown-->
+    <link rel="stylesheet" href="{% static 'css/dropdown_dashboard.css' %}">
+    <script src="https://js.stripe.com/v3/%22%3E"></script>
+    <script src="{% static 'js/Checkout.js' %}"></script>
+
+    
+    <title>GCS Coop | {% block title %} {% endblock %}</title>
+</head>
+<body>
+
+{% if session_flag <= 2 %}
+    <!--Navbar de sitio-->
+        <header>
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="{% url 'dashboard' %}">
+                        <img id="nav_logo" src="{% static 'img/logo_gcs_2.png' %}" alt="logo_gcs">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+        
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" pointer-events: none>
+                                    Revista digital
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'digital_magazine' %}">Consulta revista digital</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Consulta directorio</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Crear artículo</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Publirreportaje</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Podcast</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Capacitación
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'tuto_process' 1 %}">Proceso de ventas</a>
+                                    <a class="dropdown-item" href="{% url 'tuto_process' 2 %}">Manejo página web</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Motivacionales</a>
+                                    <a class="dropdown-item" href="{% url 'related_videos' %}">IMSS</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Infonavit</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Foros abiertos con productos y servicios</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="{% url 'oficial_pages' %}" role="button">
+                                    Acceso páginas oficiales
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="{% url 'downloads' %}"  role="button" >
+                                    Descargables
+                                </a>
+                            </li>
+
+                            <li class="nav-item {% if request.path == '/dashboard/services/' %}active{% endif %}">
+                                {% if request.user.is_staff %}
+                                    <a class="nav-link disabled" href="{% url 'services' %}">Servicios<span class="sr-only">(current)</span></a>
+                                {% endif %}
+                            </li>
+                            <li class="nav-item {% if request.path == '/dashboard/message/' %}active{% endif %}">
+                            {% if request.user.is_staff %}
+                                <a class="nav-link disabled {% if session_flag == 1 %} {% endif %}" href="{% url 'message' %}">Contacto</a>
+                            {% endif %}
+                            <li class="nav-item dropdown disabled {% if request.path == '/dashboard/' %}active{% endif %}">
+                                <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Socios
+                                </a>
+                                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                    <li>
+                                        <a class="dropdown-item {% if session_flag == 1 %}disabled{% endif %}" href="{% url 'dashboard' %}">Matríz de socios</a>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="#" class="dropdown-item trigger right-caret" role="button">Alta nuevo socio</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{% url 'invitation_code' %}" class="dropdown-item" >Código de invitación</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a href="{% url 'new_register' %}" class="dropdown-item">Registrar nuevo socio</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown {% if request.path == '/dashboard/my_infor/' %}active{% endif %}">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Mi cuenta
+                                </a>
+                                <ul class="dropdown-menu multi-level dropdown-menu-my-account" role="menu" aria-labelledby="dropdownMenu">
+
+                                    <a class="dropdown-item {% if session_flag == 1 %}disabled{% endif %}" href="{% url 'v_info_user' request.user.id %}">Mi perfil</a>
+
+                                    <!-- Inicio Comentario-->
+                                    <div class="dropdown-divider"></div>
+                                    <li class="dropdown-submenu dropdown-submenu-my-account">
+                                        <a tabindex="-1" href="#" class="dropdown-item trigger right-caret" role="button">Pagos</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalinscription">Inscripción</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalcontribution">Aportación</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Fin Comentario-->
+
+                                     <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>
+                                </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+{% else %}
+    <!--Navbar de sitio-->
+        <header>
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="{% url 'dashboard' %}">
+                        <img id="nav_logo" src="{% static 'img/logo_gcs_2.png' %}" alt="logo_gcs">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Revista digital
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'digital_magazine' %}">Consulta revista digital</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Consulta directorio</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Crear artículo</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Publirreportaje</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Podcast</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Capacitación
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'tuto_process' 1 %}">Proceso de ventas</a>
+                                    <a class="dropdown-item" href="{% url 'tuto_process' 2 %}">Manejo página web</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Motivacionales</a>
+                                    <a class="dropdown-item" href="{% url 'related_videos' %}">IMSS</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Infonavit</a>
+                                    <a class="dropdown-item" href="{% url 'working' %}">Foros abiertos con productos y servicios</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'oficial_pages' %}" role="button">
+                                    Acceso páginas oficiales
+                                </a>
+                            </li>
+ 
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'downloads' %}"  role="button" >
+                                    Descargables
+                                </a>
+                            </li>
+
+                            <li class="nav-item {% if request.path == '/dashboard/services/' %}active{% endif %}">
+                                {% if request.user.is_staff %}
+                                    <a class="nav-link" href="{% url 'services' %}">Servicios<span class="sr-only">(current)</span></a>
+                                {% endif %}
+                            </li>
+
+                            <li class="nav-item {% if request.path == '/dashboard/message/' %}active{% endif %}">
+                            {% if request.user.is_staff %}
+                                <a class="nav-link {% if session_flag == 1 %}disabled{% endif %}" href="{% url 'message' %}">Contacto</a>
+                            {% endif %}
+                            <li class="nav-item dropdown {% if request.path == '/dashboard/' %}active{% endif %}">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Socios
+                                </a>
+                                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                    <li>
+                                        <a class="dropdown-item {% if session_flag == 1 %}disabled{% endif %}" href="{% url 'dashboard' %}">Matríz de socios</a>
+                                    </li>
+                                    <div class="dropdown-divider"></div>
+                                    <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="#" class="dropdown-item trigger right-caret" role="button">Alta nuevo socio</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{% url 'invitation_code' %}" class="dropdown-item" >Código de invitación</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a href="{% url 'new_register' %}" class="dropdown-item">Registrar nuevo socio</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown {% if request.path == '/dashboard/my_infor/' %}active{% endif %}">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Mi cuenta
+                                </a>
+                                <ul class="dropdown-menu multi-level dropdown-menu-my-account" role="menu" aria-labelledby="dropdownMenu">
+
+                                    <a class="dropdown-item {% if session_flag == 1 %} disabled {% endif %}" href="{% url 'v_info_user' request.user.id %}">Mi perfil</a>
+
+                                    <!-- Inicio Comentario-->
+                                    <div class="dropdown-divider"></div>
+                                    <li class="dropdown-submenu dropdown-submenu-my-account">
+                                        <a tabindex="-1" href="#" class="dropdown-item trigger right-caret" role="button">Pagos</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalinscription">Inscripción</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalcontribution">Aportación</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Fin Comentario-->
+
+                                     <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+{% endif %}
+
+
+    <!--Contenido principal-->
+    <main>
+        <section id="datos_ingreso">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item active" aria-current="page">Bienvenid@ {{request.user.get_full_name}}</li> <li class="breadcrumb-item active" aria-current="page">Último ingreso: {{request.user.last_login}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="principal">
+            {% block content %} {% endblock %}
+        </section>
+    </main>
+    <footer id="footer">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg col-md col-sm col-12">
+                    <img id="footer_logo" src="{% static 'img/logo_gcs.png' %}" class="img-fluid" alt="logo_footer">
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <small>Powered by Quantum Qwerty.</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script>
+        AOS.init()
+    </script>
+    <!--Modal-->
+    {% include "dashboard/modal/pass_change.html" %}
+    {% include "dashboard/modal/info_change.html" %}
+    {% include "dashboard/modal/video_rep.html" %}
+    {% include "dashboard/modal/inscription.html" %}
+    {% include "dashboard/modal/contribution.html" %}
+    {% include "dashboard/modal/no_file.html" %}
+</body>
+
+<!--Scripts-->
+    <!--JQuery-->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <!--Popper-->
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <!--JS-->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<script>
+    $(function(){
+	    $(".dropdown-menu > li > a.trigger").on("click",function(e){
+		    var current=$(this).next();
+            var grandparent=$(this).parent().parent();
+            if($(this).hasClass('left-caret')||$(this).hasClass('right-caret'))
+                $(this).toggleClass('right-caret left-caret');
+            grandparent.find('.left-caret').not(this).toggleClass('right-caret left-caret');
+            grandparent.find(".sub-menu:visible").not(current).hide();
+            current.toggle();
+            e.stopPropagation();
+	    });
+        $(".dropdown-menu > li > a:not(.trigger)").on("click",function(){
+            var root=$(this).closest('.dropdown');
+            root.find('.left-caret').toggleClass('right-caret left-caret');
+            root.find('.sub-menu:visible').hide();
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Pensión Ley 97
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="col-lg-12 d-flex justify-content-center">
+        <h1 class="display-1">Pensión Ley 97</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <img src="{% static 'img/pension_1.jfif' %}" class="img-fluid" alt="grandparents hugging" data-aos="fade-down-right">
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="jumbotron jumbotron-fluid" data-aos="zoom-out">
+                <div class="container" >
+                    <h3 class="h3_pension_style">1.-¿Cuántas semanas debo de tener para pensionarme en Ley 97?</h3>                        
+                        <p>De acuerdo a la nueva ley, pasó de 1,250 a 750 semanas cotizadas.</p>
+                    <h3 class="h3_pension_style"> 2.- ¿A qué edad me puedo pensionar?</h3>
+                        <p>A partir de los 60 años.</p>
+                    <h3 class="h3_pension_style">3.- ¿Cómo saber a qué Ley pertenezco?</h3>                        
+                        <p>Si te diste de alta por primera vez en el IMSS antes 1ro de julio de 1997, perteneces a la Ley 73. Si te diste de alta después, perteneces a la Ley 97.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-12">
+            <div class="jumbotron jumbotron-fluid d-none d-md-block" data-aos="zoom-in">
+                <div class="container" >
+                    <h3 class="h3_pension_style" >Bajo este régimen de pensión existen 3 modalidades por las que te puedes pensionar:</h3>                        
+                    <ol class="ul_style">         
+                        <li><b><u>Renta Vitalicia:</u></b> Donde la pensión la paga una aseguradora.</li>                         
+                        <li><b><u>Retiro Programado:</u></b> Donde la pensión la paga tu AFORE.</li>
+                        <li><b><u>Pensión mínima Garantizada:</u></b> El Gobierno Federal paga la pensión.  </li>                                 
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-6 col-12">
+            <img src="{% static 'img/pension_2.jfif' %}" class="img-fluid" alt="grandparents hugging" data-aos="fade-left">
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+            <div class="jumbotron jumbotron-fluid d-block d-sm-none" data-aos="zoom-in">
+                <div class="container" >
+                    <h3 class="h3_pension_style" >Bajo este régimen de pensión existen 3 modalidades por las que te puedes pensionar:</h3>                        
+                    <ol class="ul_style">         
+                        <li><b><u>Renta Vitalicia:</u></b> Donde la pensión la paga una aseguradora.</li>                         
+                        <li><b><u>Retiro Programado:</u></b> Donde la pensión la paga tu AFORE.</li>
+                        <li><b><u>Pensión mínima Garantizada:</u></b> El Gobierno Federal paga la pensión.  </li>                                 
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-8 col-12">
+            <div class="jumbotron jumbotron-fluid" data-aos="zoom-in">
+                <div class="container" >
+                    <h3 class="h3_pension_style">¿Cuanto recibire al pensionarme?</h3>     
+                    <p>El cálculo de la pensión a recibir en esta ley 97, dependerá del número de semanas cotizadas y el  promedio del salario que cotizó durante toda su vida.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

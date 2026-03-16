@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Filosofía
+{% endblock %}
+
+{% block content %}
+<section id="filosofia">
+    <div class="container-fluid mt-2 mb-1">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12 text-center">
+                <img id="img_us" src="{% static 'img/us.jpg' %}" class="d-block w-100" alt="us">
+                <div class="overlay_filosofy">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 mt-3 text-center">
+                                <h1 id="h1_us" class="mb-3 d-none d-sm-block display-4" data-aos="fade-up">¿Quiénes somos?</h1>
+                                <p class="p_us overlay d-none d-sm-block" data-aos="fade-right">Somos una Sociedad Cooperativa comprometida con la seguridad social, bienestar y desarrollo profesional de todos nuestros socios.</p>
+                                <p class="overlay d-none d-sm-block" data-aos="fade-left">La sociedad cooperativa es una forma de organización social, integrada por personas físicas con base en intereses comunes y en principios de SOLIDARIDAD, ESFUERZO PROPIO Y AYUDA MUTUA, con el propósito de satisfacer NECESIDADES INDIVIDUALES Y COLECTIVAS, a través de actividades económicas, de CONSUMO DE BIENES Y SERVICIOS.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="jumbotron jumbotron-fluid d-block d-sm-none">
+                    <div class="container">
+                        <h1 class="display-4">¿Quiénes somos?</h1>
+                        <p>Somos una Sociedad Cooperativa comprometida con la seguridad social, bienestar y desarrollo profesional de todos nuestros socios.</p>
+                        <p>La sociedad cooperativa es una forma de organización social, integrada por personas físicas con base en intereses comunes y en principios de SOLIDARIDAD, ESFUERZO PROPIO Y AYUDA MUTUA, con el propósito de satisfacer NECESIDADES INDIVIDUALES Y COLECTIVAS, a través de actividades económicas, de CONSUMO DE BIENES Y SERVICIOS.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-lg-12 col-md-12 col-12" data-aos="fade-up">
+                <img id="img_filosofy" src="{% static 'img/filosofy.jpg' %}" class="img-fluid d-block" alt="filosofy">
+                <div class="overlay_filosofy">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-12 mt-3">
+                                <h1 id="h1_filosofy" class="d-none d-lg-block display-4 mt-5">Objetivo</h1>
+                                <p id="p_filosofy" class="overlay d-none d-lg-block mt-4">GCS Coop tiene como objetivo principal empoderar a sus socios mediante seguridad social, oportunidad y crecimiento, haciendo frente a las necesidades y aspiraciones económicas, sociales y culturales, con programas de publicidad y promoción de sus productos y servicios en redes sociales de todos los que la integramos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="jumbotron jumbotron-fluid d-block d-sm-none">
+                    <div class="container">
+                        <h1 class="display-4">Objetivo</h1>
+                        <p>GCS Coop tiene como objetivo principal empoderar a sus socios mediante seguridad social, oportunidad y crecimiento, haciendo frente a las necesidades y aspiraciones económicas, sociales y culturales, con programas de publicidad y promoción de sus productos y servicios en redes sociales de todos los que la integramos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12 mt-2">
+                <img src="{% static 'img/mision.jfif' %}" class="img-fluid" alt="vision" data-aos="fade-up-right">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-2">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Misión</h1>
+                        <p>Brindar protección en materia de Seguridad Social y beneficios económicos al mayor número de Profesionistas Independientes y a sus familias, con el fin de mantener un estilo de vida seguro, estable, confiable y sin preocupaciones, con una estrategia publicitaria digital que IMPULSA TU TALENTO.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="jumbotron jumbotron-fluid d-none d-md-block">
+                    <div class="container">
+                        <h1 class="display-4">Visión</h1>
+                        <p>Administrar al mayor número de socios con una red de promoción, administrada en una plataforma de Internet con los mismos integrantes de la empresa, para incrementar sus ingresos, promocionando sus productos y servicios, alcanzando el mayor número de clientes potenciales por medio de las redes sociales.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <img src="{% static 'img/vision.jfif' %}" class="img-fluid" alt="vision" data-aos="fade-up-left">
+            </div>
+            <div class="jumbotron jumbotron-fluid d-block d-sm-none">
+                <div class="container">
+                    <h1 class="display-4">Visión</h1>
+                    <p>Administrar al mayor número de socios con una red de promoción, administrada en una plataforma de Internet con los mismos integrantes de la empresa, para incrementar sus ingresos, promocionando sus productos y servicios, alcanzando el mayor número de clientes potenciales por medio de las redes sociales.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12">
+                <img src="{% static 'img/valores.jpg' %}" class="img-fluid mt-5" alt="values" data-aos="fade-up-right">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Valores</h1>
+                        <p>Igualdad: Todos los socios cuentan con los mismos derechos, obligaciones y responsabilidades.</p>
+                        <p>Solidaridad: Proporcionar apoyo espontáneo, generoso y voluntarioso en beneficios a los socios.</p>
+                        <p>Responsabilidad : Cumplir con las funciones y atribuciones asignadas de la empresa.</p>
+                        <p>Honestidad: Actuar con decencia, pudor, dignidad, sinceridad, justicia, rectitud y honradez.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

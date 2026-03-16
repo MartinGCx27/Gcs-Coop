@@ -1,0 +1,49 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Crear servicios
+{% endblock %}
+
+{% block content %}
+<div class="alert alert-primary" role="alert">
+    Pre-registros de usuarios al sistema
+</div>
+<div>
+    {% if pre_users %}
+        <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">NSS</th>
+                        <th scope="col">Registro</th>
+                        <th scope="col">Estatus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pre_users in pre_users %}
+                        <tr>
+                            <td><a href="{% url 'v_pre_user' pre_users.user.id %}">{{pre_users.user.first_name}}</a></td>
+                            <td>{{pre_users.user.last_name}}</td>
+                            <td>{{pre_users.user.email}}</td>
+                            <td>{{pre_users.user.username}}</td>
+                            <td>{{pre_users.user.date_joined}}</td>
+                            <td><img src="{% static 'img/pre_register.png' %}" alt="En espera"></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">No hay información</h1>
+            <p class="lead">Al parecer no hay usuarios pre-registrados en el sistema.</p>
+        </div>
+      </div>
+    {% endif %}
+</div>
+{% endblock %}

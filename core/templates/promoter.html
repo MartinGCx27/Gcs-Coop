@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Promotor
+{% endblock %}
+
+
+{% block content %}
+
+
+<section id="Promotor">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-4">Promotor</h1>
+            </div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col">
+                <img src="{% static 'img/promoter_1.jfif' %}" id="img_prom1" class="img-fluid d-none d-sm-block" alt="img promoter 1"
+                     data-aos="fade-down-right" data-aos-duration="700">
+            </div>
+            <div class="col-12 col-lg-6 mt-4">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1>¿Qué actividad como promotor debo desempeñar?</h1>
+                        <p>Invitar y hacer participes de la sociedad cooperativa a todos los profesionistas
+                            independientes que cuenten con la oportunidad de tener seguridad social (IMSS e Infonavit),
+                            y busquen maximizar la difusión de sus productos y servicios, con herramientas de publicidad y promoción en redes sociales, bajo los principios de
+                            solidaridad, esfuerzo propio y ayuda mutua.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-12 col-lg-6">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1>¿Qué beneficios tengo como promotor?</h1>
+                        <p>Recibirás un ingreso por la inscripción y por cada una de las aportaciones que realicen los
+                            socios que invites a participar en la empresa, así como tener acceso a todos los servicios de nuestras páginas de Internet, Intranet y Facebook.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <img src="{% static 'img/promoter_5.jpg' %}" id="img_prom2"  class="img-fluid d-none d-sm-block" alt="img promoter 2"
+                     data-aos="fade-up-left" data-aos-duration="700">
+            </div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col mt-5 pt-3">
+                <img src="{% static 'img/promoter_3.jpg' %}" id="img_prom3" class="img-fluid d-none d-sm-block mt-4" alt="img promoter 3"
+                     data-aos="fade-down-right" data-aos-duration="700">
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1>A quién puedo invitar como socio para que se integre en GCS-Coop</h1>
+                        <p>GCS-Coop pueden ingresar el mayor número de profesionistas independientes que deseen contar
+                            con seguridad social (IMSS e Infonavit), así como pertenecer a una empresa que les brinde
+                            beneficios económicos y oportunidades de desarrollo profesional con herramientas de publicidad y promoción en redes sociales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-12 col-lg-6">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1>Cuáles son los requisitos para recibir los ingresos de mis socios</h1>
+                        <p>Que los socios que invites a formar parte de la sociedad, realicen las aportaciones dentro de
+                            los lineamientos de la empresa. Y tú como socio de igual forma estar al corriente con tus
+                            aportaciones.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 mt-2" data-aos="fade-up-left" data-aos-duration="700">
+                <img src="{% static 'img/promoter_4.jpg' %}" id="img_prom4" class="img-fluid d-none d-sm-block" alt="img promoter 4">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

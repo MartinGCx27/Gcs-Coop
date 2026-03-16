@@ -1,0 +1,22 @@
+body{
+    background: #f9fbfa;
+}
+
+#logo_login{
+    display: block;
+    margin: auto;
+    height: 60vh;
+}
+
+#icon_user{
+    display: block;
+    border-radius: 150px;
+    width: 13vh;
+    height: 13vh;
+    margin-left: auto;
+    margin-right: auto;
+    padding-up: 70px;
+    object-fit: cover;
+    object-position: 0px -2px
+
+}

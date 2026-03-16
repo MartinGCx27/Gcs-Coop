@@ -1,0 +1,38 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Mensajes recibidos
+{% endblock %}
+
+{% block content %}
+    <div class="alert alert-primary" role="alert">
+        Matríz de mensajes
+    </div>
+    {% if message %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Mensaje</th>
+                    <th scope="col">Enviado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in message %}
+                <tr>
+                    <th scope="row">{{message.first_name}}</th>
+                    <td>{{message.last_name}}</td>
+                    <td>{{message.email}}</td>
+                    <td>{{message.message}}</td>
+                    <td>{{message.created}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3>No hay mensajes.</h3>
+    {% endif %}
+{% endblock %}

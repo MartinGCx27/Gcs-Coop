@@ -1,0 +1,62 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block title %}
+    Inicio de sesión
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="container mt-5 mb-2">
+            <div class="row">
+                <div class="col-lg-6 d-none d-sm-block" data-aos="slide-right">
+                    <img id="logo_login" src="{% static 'img/login_1.png' %}" class="img-fluid" alt="logo_gcs">
+                </div>
+                <hr>
+                <div class="col-lg-6" data-aos="slide-left">
+                    <!--Error de usuario/contraseña invalidos-->
+                    {% if form.errors %}
+                    <div class="alert alert-danger mt-3" role="alert">
+                        ¡Usuario o contraseña invalida! Verifica tu información.
+                    </div>
+                    {% endif %}
+                    <!--Fin de error de usuario/contraseña invalidos-->
+                    {% if request.user.is_authenticated %}
+                        <div class="alert alert-primary mt-5" role="alert">
+                            Hola de nuevo {{request.user.get_full_name}}
+                        </div>
+                        <hr>
+                        <a href="{% url 'dashboard' %}" class="btn btn-info btn-lg btn-block mb-3">Ingresar de nuevo</a>
+                        <small><span>Tenemos registrada una sesión activa en tu navegador, ingresa a tu cuenta con el siguiente botón.</span></small>
+                    {% else %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <img id="icon_user" src="{% static 'img/login_mini.jpg' %}" class="img-fluid" alt="icon_user">
+                                <div>
+                                    <label for="id_username">Usuario</label>
+                                    <br>
+                                    <input type="text" minlength="11" maxlength="11" name="username" autofocus="254" required id="id_username" class="form-control" placeholder="Ingresa tu usuario" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <label for="exampleInputPassword1">Contraseña</label>
+                                    <br>
+                                    <input type="password" name="password" required id="id_password" class="form-control" placeholder="Ingresa tu contraseña">
+                                    <small id="emailHelp" class="form-text text-muted">Nadie de GCS Coop te debe pedir tu contraseña.</small>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-info btn-lg btn-block mb-3" value="Acceder">Ingresar</button>
+                                <small><span><a href="{% url 'password_reset' %}">Olvidé mi contraseña</a></span></small>
+                                <hr>
+                                <small><span>¿Quieres formar parte? Da clic <a href="{% url 'qr_register' %}">aquí</a></span></small>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

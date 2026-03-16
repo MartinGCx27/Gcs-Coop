@@ -1,0 +1,126 @@
+{% extends 'process_coop/base.html' %}
+{% load static %}
+
+{% block title %}
+    Modificar documentación
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Documentación</h1>
+                      <p class="lead">Aquí ingresa la Documentación entregada por nuestro socio en formato PDF.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label hidden>Nombre de usuario</label>
+                            <input hidden type="text" class="form-control" name="user" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label>Identificación oficial</label>
+                            <br>
+                            {{form.identification}}
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Identificación oficial reverso</label>
+                            <br>
+                            {{form.identification_reverse}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label>Comprobante de domicilio</label>
+                            <br>
+                            {{form.address_comp}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label>Acta de nacimiento</label>
+                            <br>
+                            {{form.born_cert}}
+                        </div>
+                        <div class="col-lg-6">
+                            <label>CURP</label>
+                            <br>
+                            {{form.curp}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label>RFC</label>
+                            <br>
+                            {{form.rfc}}
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Semanas cotizadas</label>
+                            <br>
+                            {{form.cot_weeks}}
+                        </div>
+                    </div>
+                    <br>
+                    {% if val_info_contract %}
+                    <section>
+                        <div id="alert_highway_contribution" class="alert alert-info mt-4" role="alert">
+                            <div class="form-row">
+                                <div class="col-lg-6">
+                                    <label>Contrato cooperativista</label>
+                                    <br>
+                                    {{form.contract_coop}}
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Contrato socio individual</label>
+                                    <br>
+                                    {{form.contract_user}}
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </section>
+                    {% endif %}
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-warning btn-lg btn-block">Modificar</button>
+                        </div>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% if val_info_contract %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-warning" role="alert">
+                    Si deseas generar nuevamente los contratos para el usuario, da clic <a href="{% url 'update_contract_user' user.id %}">aquí</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

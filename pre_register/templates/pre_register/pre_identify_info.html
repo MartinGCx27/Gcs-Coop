@@ -1,0 +1,76 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Identificación de usuario
+{% endblock %}
+
+{% block content %}
+    <section id="general_info">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                        <h1 class="display-4">Identificación del usuario</h1>
+                        <p class="lead">Ingresa los siguientes datos para la identificación del nuevo socio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container mb-3">
+            <div class="row">
+                <div class="col">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <label>NSS Director</label>
+                                <input disabled name="ceo" type="text" class="form-control" value="{{user_login.ceo.user.username}}">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <label>NSS Promotor ascendente</label>
+                                <input disabled name="upstream_promoter" type="text" class="form-control" value="{{request.user.username}}">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <label>Oficina</label>
+                                <input disabled name="offices_list" type="text" class="form-control" value="{{user_login.offices_list}}">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <label>Estatus motivo</label>
+                                <input disabled name="ceo" type="text" class="form-control" value="Nuevo">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <label>Estatus de usuario</label>
+                                <input disabled name="upstream_promoter" type="text" class="form-control" value="Alta">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <div class="col-lg-6 col-md-4 col-12">
+                                <label>Selecciona el motivo de afiliación</label>
+                                {{form.affiliation_reason}}
+                            </div>
+                            <div class="col-lg-6 col-md-4 col-12">
+                                <label>Selecciona el tipo de afiliación</label>
+                                {{form.affiliate_type}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Registrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

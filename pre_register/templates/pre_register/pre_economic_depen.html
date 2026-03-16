@@ -1,0 +1,139 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Dependientes economicos
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Dependientes económicos del socio</h1>
+                      <p class="lead">Ingresa los datos correspondientes a los dependientes economicos del socio. Éstos pueden ser familiares, amigos, etc.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label hidden>Nombre de usuario</label>
+                            <input hidden type="text" class="form-control" name="user" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Nombre(s) de dependiente</label>
+                            <input required type="text" class="form-control" name="name" placeholder="Ingresa el nombre(s)" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Apellido paterno</label>
+                            <input required type="text" class="form-control" name="ape_pat" placeholder="Ingresa el primer apellido" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Apellido materno</label>
+                            <input required type="text" class="form-control" name="ape_mat" placeholder="Ingresa el segundo apellido" autocomplete="off">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Fecha de nacimiento</label>
+                            <input required type="date" class="form-control" name="birthdate" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Edad</label>
+                            <input required id="age" type="number" minlength="0" maxlength="100" class="form-control" name="age" placeholder="Ingresa la edad" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Parentesco</label>
+                            {{form.relation}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Actividad del dependiente</label>
+                            {{form.dependent_activity}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-success btn-lg btn-block">Registrar</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            {% if depen_data %}
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido paterno</th>
+                                        <th scope="col">Apellido materno</th>
+                                        <th scope="col">Parentesco</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for depen_data in depen_data %}
+                                        <tr>
+                                            <td>{{depen_data.name}}</td>
+                                            <td>{{depen_data.ape_pat}}</td>
+                                            <td>{{depen_data.ape_mat}}</td>
+                                            <td>{{depen_data.relation}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <br>
+                                <a href="{% url 'pre_personal_ref' user.id %}" class="btn btn-primary btn-lg btn-block">Avanzar</a>
+                                <br>
+                            {% else %}
+                                <div class="alert alert-danger" role="alert">
+                                    No hay dependientes registrados
+                                </div>
+                                <div class="mb-2">
+                                    <a href="{% url 'pre_personal_ref' user.id %}" class="btn btn-outline-warning btn-lg btn-block">Omitir</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        $('input[name="birthdate"]').blur (function(){
+            let dateB =$(this).val();
+            var today = new Date();
+            var dateBirth = new Date(dateB);
+            var age = today.getFullYear() - dateBirth.getFullYear();
+            var m = today.getMonth() - dateBirth.getMonth();
+            
+            if (m < 0 || (m === 0 && today.getDate() < dateBirth.getDate())) {
+                age--;
+            }
+            document.getElementById("age").value = age;
+            $('input[id="age"]').val(age);
+        });
+    });
+</script>
+{% endblock %}

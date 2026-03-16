@@ -1,0 +1,14 @@
+.idea
+# Migrations directories for App
+*/migrations
+# Pycache directories
+*/__pycache__
+# Media Files
+media/*
+# Pyc extension files
+*.pyc
+# Log extension files
+*.logstatic.tar.gz
+media.tar.gz
+static.tar.gz
+media.tar.gz

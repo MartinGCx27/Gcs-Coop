@@ -1,0 +1,98 @@
+{% extends 'process_coop/base.html' %}
+{% load static %}
+
+{% block title %}
+    Modificación de identificación
+{% endblock %}
+
+{% block content %}
+    <section id="general_info">
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                        <h1 class="display-4">Identificación del usuario</h1>
+                        <p class="lead">Aquí debes ingresar los siguientes datos para la identificación del nuevo socio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container mb-3">
+            <div class="row">
+                <div class="col">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            {% if is_superuser %}
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <label>Director</label>
+                                    <select name="ceo" class="form-control">
+                                        <option value="{{instancia.ceo.id}}">{{instancia.ceo}}</option>
+                                        {% for ceo_list in ceo_list %}
+                                            <option value="{{ceo_list.id}}">{{ceo_list}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% else %}
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <label>Director</label>
+                                    <input disabled name="ceo" type="text" class="form-control" value="{{instancia.ceo}}">
+                                    <input hidden name="ceo" type="text" class="form-control" value="{{instancia.ceo.id}}">
+                                </div>
+                            {% endif %}
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <label>NSS Promotor ascendente</label>
+                                <input disabled name="upstream_promoter" type="text" class="form-control" value="{{instancia.upstream_promoter}}">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <label>Oficina</label>
+                                <input disabled name="offices_list" type="text" class="form-control" value="{{instancia.offices_list}}">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <label>Estatus motivo</label>
+                                <input disabled name="status_reason" type="text" class="form-control" value="{{instancia.status_reason}}">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <label>Estatus de usuario</label>
+                                <input disabled name="status_user" type="text" class="form-control" value="{{instancia.status_user}}">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <div class="col-lg-6 col-md-4 col-12">
+                                <label>Selecciona el motivo de afiliación</label>
+                                {{form.affiliation_reason}}
+                            </div>
+                            <div class="col-lg-6 col-md-4 col-12">
+                                <label>Selecciona el tipo de afiliación</label>
+                                {{form.affiliate_type}}
+                            </div>
+                        </div>
+                        {% if is_superuser %}
+                            <br>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Es director </label> <input type="checkbox" name="is_director" {% if instancia.user_type.id == 1 %} checked {% endif %}>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <br>
+                        {{form.errors}}
+                        <div class="form-row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-outline-warning btn-lg btn-block">Modificar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

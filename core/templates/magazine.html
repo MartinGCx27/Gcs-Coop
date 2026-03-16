@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Revista GCS
+{% endblock %}
+
+{% block content %}
+<section id="magazine">
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-lg-8 col-md-6 col-12">
+                <img id="img_magazine" src="{% static 'img/revista.jpg' %}" class="img-fluid" alt="vision" data-aos="zoom-in">
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 mt-5">
+                <div data-aos="fade-up-left">
+                    <h1 class="display-4">Objetivo</h1>
+                    <p>Nuestro objetivo al brindar una revista digital es crear una comunidad con nuestros socios donde puedan interactuar y dialogar, así creando una mejor sociedad. Principalmente mantenerlos informados de todos los beneficios que obtienen al estar en la Sociedad Cooperativa.</p>
+                    <br>
+
+                    <h1 class="display-4">¿Qué es la revista digital?</h1>
+                    <p>Publicación periódica digital, que consiste en informar sobre varios temas de interés por los socios. Las revistas contienen artículos, crónicas, infografías, ilustraciones y directorios actualizado de todos los socios. </p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-lg-5 col-md-6 col-12 mt-5">
+                <div class="jumbotron jumbotron-fluid" data-aos="fade-up-right">
+                    <div class="container mt-3">
+                        <h1 class="display-4">Ventajas</h1>
+                    </div>
+                </div>
+                <div>
+                    <h4 data-aos="fade-down-right">Promoción y difusión de servicios y/o productos de los socios.</h4>
+                    <h4 data-aos="fade-down-right">Formato creativo y calidad visual.</h4>
+                    <h4 data-aos="fade-down-right">Mayor interactividad con los socios.</h4>
+                    <h4 data-aos="fade-down-right">Publicación y distribucción con mayor alcance y rapidez.</h4>
+                    <h4 data-aos="fade-down-right">Los socios podrán consultar las revistas cuando quieran, se quedaran guardadas en la página.</h4>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6 col-12">
+                <img id="img_magazine" src="{% static 'img/revista_2.png' %}" class="img-fluid" alt="vision" data-aos="zoom-in">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

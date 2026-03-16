@@ -1,0 +1,159 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+    {% if session_flag == 1 %}
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-success" role="alert">
+                        <h3 class="alert-heading">¡Felicidades!</h3>
+                        <p>Bienvenid@ {{request.user.get_full_name}}, es un honor contar contigo en este gran equipo. Ahora, solo debes seguir el siguiente paso para completar tu registro en la plataforma:</p>
+                        <hr>
+                        <p class="mb-0">Por seguridad, solamente tú debes conocer tu contraseña de acceso a la plataforma, por lo que es necesario que la cambies de inmediato.</p>
+                    </div>
+                    <div class="alert alert-warning" role="alert">
+                        Recuerda que nadie en GCS-Coop te debe pedir tu contraseña de acceso.
+                    </div>
+                    <a href="#" data-toggle="modal" data-target="#passmodal" class="btn btn-primary btn-lg btn-block mb-3">Cambiar ahora</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-primary" role="alert">
+                        Matriz de socios
+                    </div>
+                </div>
+            </div>
+            {% if gen_info %}
+                <div class="row mb-3">
+                    <div class="col">
+                        <!--Barra de busqueda-->
+                        <nav class="navbar-light bg-light">
+                            <form id="search-title" method="GET">
+                                <input class="form-control" placeholder="Ingresa el nombre, apellidos o NSS" aria-label="Search" name="buscar" value="{{request.GET.buscar}}">
+                            </form>
+                        </nav>
+                        <!--Barra de busqueda-->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {% if is_superuser %}
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellido</th>
+                                            <th scope="col">NSS</th>
+                                            <th scope="col">Promotor ascendente</th>
+                                            <th scope="col">Director</th>
+                                            <th scope="col">Estatus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for gen_info in gen_info %}
+                                            <tr>
+                                                <td><a href="{% url 'v_info_user' gen_info.user.id %}">{{gen_info.user.first_name}}</a></td>
+                                                <td>{{gen_info.user.last_name}}</td>
+                                                <td>{{gen_info.user.username}}</td>
+                                                {% if gen_info.upstream_promoter == 'Dummy Director' %}
+                                                    <td>Pre-registro</td>
+                                                {% else %}
+                                                    <td>{{gen_info.upstream_promoter}}</td>
+                                                {% endif %}
+
+                                                {% if gen_info.ceo == 'Dummy Director' %}
+                                                    <td>Pre-registro</td>
+                                                {% else %}
+                                                    <td>{{gen_info.ceo.user.get_full_name}}</td>
+                                                {% endif %}
+
+                                                {% if gen_info.status_pmnt_sesion.sesion == '3' %}
+                                                    <td><img src="{% static 'img/check.png' %}" alt="activo"></td>
+                                                {% else %}
+                                                    <td><img src="{% static 'img/no_check.png' %}" alt="inactivo"></td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellido</th>
+                                            <th scope="col">Correo</th>
+                                            <th scope="col">NSS</th>
+                                            <th scope="col">Estatus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for gen_info in gen_info %}
+                                            <tr>
+                                                <td>
+                                                    {% if request.user.is_staff %}
+                                                        <a href="{% url 'v_info_user' gen_info.user.id %}">{{gen_info.user.first_name}}</a>
+                                                    {% else %}
+                                                        {{gen_info.user.first_name}}
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{gen_info.user.last_name}}</td>
+                                                <td>{{gen_info.user.email}}</td>
+                                                <td>{{gen_info.user.username}}</td>
+                                                {% if gen_info.status_pmnt_sesion.sesion == '3' %}
+                                                    <td><img src="{% static 'img/check.png' %}" alt="activo"></td>
+                                                {% else %}
+                                                    <td><img src="{% static 'img/no_check.png' %}" alt="inactivo"></td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col">
+                        {% if search_validate %}
+                            <!--Barra de busqueda-->
+                            <nav class="navbar-light bg-light">
+                                <form id="search-title" method="GET">
+                                    <input class="form-control" placeholder="Ingresa el nombre, apellidos o NSS" aria-label="Search" name="buscar" value="{{request.GET.buscar}}">
+                                </form>
+                            </nav>
+                            <!--Barra de busqueda-->
+                            <hr>
+                            <div class="alert alert-danger" role="alert">
+                                Ningún resultado coincide con la búsqueda.
+                            </div>
+                        {% else %}
+                            <div class="jumbotron">
+                                <h1 class="display-4">No hay socios para mostrar</h1>
+                                <p class="lead">Al parecer aún no se ha encontrado a ningún socio.</p>
+                                <hr class="my-4">
+                                <p>¡Registra o invita a un amigo a formar parte de GCS-Coop!</p>
+                                <a class="btn btn-success btn-lg" href="{% url 'new_register' %}" role="button">Registrar nuevo</a>
+                                <br>
+                                <small><span><a href="{% url 'invitation_code' %}">O genera un código de invitación dando clic aquí</a></span></small>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

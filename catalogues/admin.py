@@ -1,0 +1,32 @@
+from django.contrib import admin
+from .models import *
+
+# Register your models here.
+
+admin.site.register(StatusServices)
+admin.site.register(StatusUser)
+admin.site.register(StatusReason)
+admin.site.register(StatusIssue)
+admin.site.register(Status)
+admin.site.register(OfficesList)
+admin.site.register(AffiliateType)
+admin.site.register(AffiliationReason)
+admin.site.register(UserType)
+admin.site.register(MaritalStatus)
+admin.site.register(MatrimonialRegime)
+admin.site.register(SexList)
+admin.site.register(StateList)
+admin.site.register(NumberType)
+admin.site.register(LocationCatalogue)
+admin.site.register(StatusImss)
+admin.site.register(ActivityType)
+admin.site.register(AccountType)
+admin.site.register(PaymentMethod)
+admin.site.register(DependentRelation)
+admin.site.register(ReferenceRelation)
+admin.site.register(DependentActivity)
+admin.site.register(PaymentImss)
+admin.site.register(VideoTutorialStatus)
+admin.site.register(PromotersListStatus)
+admin.site.register(EnrollmentStatus)
+admin.site.register(EnrollmentCatalogue)

@@ -1,0 +1,42 @@
+<!-- Modal -->
+<div class="modal fade" id="infomodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cambio de información</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="alert alert-warning" role="alert">
+                                Lamentamos que tengas que usar esta función debido a que hay algún problema con tu información. No te preocupes, los cambios de información suelen reflejarse al poco tiempo de la solicitud. Debes ser muy específico al describir tu problema, para que los cambios sean lo más preciso posible.
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label>Título</label>
+                            <input required type="text" class="form-control" name="title" placeholder="Ingresa el asunto del mensaje">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label>Mensaje</label>
+                            <textarea  required name="message" class="form-control" placeholder="Ingresa el mensaje siendo específico con el inconveniente." cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+            </form>
+      </div>
+    </div>
+</div>

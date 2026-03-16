@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Mensaje envíado
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron">
+                    <h1 class="display-4">¡Mensaje envíado!</h1>
+                    <p class="lead">Pronto un miembro de nuestro equipo se pondrá en contacto contigo para brindarte más información.</p>
+                    <hr class="my-4">
+                    <p>Procura revisar constantemente tu bandeja de correo electrónico para no perderte de la información enviada.</p>
+                    <a class="btn btn-primary btn-lg" href="{% url 'contact' %}" role="button">Regresar al sitio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

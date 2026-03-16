@@ -1,0 +1,135 @@
+{% extends 'process_coop/base.html' %}
+{% load static %}
+
+{% block title %}
+    Datos de cobro
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Información de comisiones del socio</h1>
+                      <p class="lead">Aquí ingresa los datos correspondientes a las comiciones del socio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="progress_bar">
+  <div class="container mb-3">
+      <div class="row">
+          <div class="col">
+              <div class="progress">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+                </div>
+                <span><small>Esta barra indíca el progreso del trámite.</small></span>
+          </div>
+      </div>
+  </div>
+</section>
+<section>
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label hidden>Nombre de usuario</label>
+                            <input hidden type="text" class="form-control" name="user" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label>Nombre de banco</label>
+                            {{form.bnk_name}}
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Tipo de cuenta</label>
+                            {{form.account_type}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Número de tarjeta</label>
+                            <input required minlength="15" maxlength="16" type="text" class="form-control" id="css_number" name="css_number" placeholder="Ingresa el número de tarjeta" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>CLABE</label>
+                            <input required type="text" minlength="18" maxlength="18" class="form-control" id="css_clave" name="css_clave" placeholder="Ingresa la cuenta CLABE" autocomplete="off" >
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Nombre de titular</label>
+                            <input required type="text" class="form-control" name="css_name" placeholder="Ingresa el nombre del titular" autocomplete="off">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Forma de pago</label>
+                            {{form.payment_method}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Registrar</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            {% if not ecodep_data %}
+                                <a href="{% url 'economic_dependent' user.id %}" class="btn btn-warning btn-lg btn-block">Omitir</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {{form.errors}}
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    /*
+    document.getElementById("demo").onclick = function() {disable_clave()};
+    document.getElementById("demo").onclick = function() {disable_number()};
+
+    function disable_clave() {
+    document.getElementById("css_clave").disabled=true
+    document.getElementById("css_clave").innerHTML = "";
+    }
+    function disable_number() {
+    document.getElementById("css_number").disabled=true
+    document.getElementById("css_number").innerHTML = "";
+    }
+*/
+    $(function(){
+        $('input[name="css_number"]').click(function(){
+            $('input[name="css_clave"]').val('');
+            $("#"+'css_clave').attr("readonly","readonly");
+            $("#"+'css_number').removeAttr("readonly","readonly");
+                //document.getElementById('css_clave').attr('readonly');
+            
+        });
+    });
+    
+    $(function(){
+        $('input[name="css_clave"]').click(function(){
+            $('input[name="css_number"]').val('');
+            $("#"+'css_number').attr("readonly","readonly");
+            $("#"+'css_clave').removeAttr("readonly");
+                //document.getElementById('css_number').attr('readonly');
+            
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'process_coop/base.html' %}
+{% load static %}
+
+{% block title %}
+    Modificar datos del IMSS
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Datos de IMSS</h1>
+                      <p class="lead">Modifica el registro del IMSS del socio, recuerda que los calculos se hacen de manera automática.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Ingresa el salario de tu cotización</label>
+                            {{form.salario_cot}}
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Ingresa las semanas cotizadas hasta hoy</label>
+                            <input value="{{instancia.coti_weeks}}" type="number" min="0" max="999999" maxlength="6" class="form-control" name="coti_weeks" autocomplete="off">
+                            <a href="https://serviciosdigitales.imss.gob.mx/semanascotizadas-web/usuarios/IngresoAsegurado" target="_blank"><small>Consulta tus semanas cotizadas</small></a>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Seleccione la fecha de alta del cooperativista</label>
+                            <input value="{{instancia.imss_register_date|date:'Y-m-d'}}" type="date" class="form-control" name="imss_register_date" autocomplete="off">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-warning btn-lg btn-block">Modificar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

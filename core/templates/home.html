@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Inicio
+{% endblock %}
+
+{% block content %}
+    <section id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col">
+                    <div id="carousel" class="carousel slide" data-ride="carousel" data-pause="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img id="museum" src="{% static 'img/car_4.jpg' %}" class="d-block w-100" alt="car_4">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'img/Car_1.png' %}" class="d-block w-100" alt="car_1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'img/Car_2.png' %}" class="d-block w-100" alt="car_2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'img/Car_3.png' %}" class="d-block w-100" alt="car_3">
+                            </div>
+                        </div>
+                        <div class="overlay">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6 offset-md-6 text-center text-md-right mt-3">
+                                        <br>
+                                        <h1>GCS-Coop</h1>
+                                        <h2>Empresa comprometida con la Seguridad Social, el desarrollo profesional y económico de todos nuestros Socios.</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container text-center" id="services">
+            <div class="row text-center mt-3">
+                <div class="col">
+                    <div class="jumbotron jumbotron-fluid" data-aos="fade-down">
+                        <div class="container">
+                            <h4>¡Suscríbete como Socio a GCS-Coop!</h4>
+                            <p>Un Modelo de Negocio formado por un grupo de socios profesionistas independientes, que contamos con Seguridad Social (IMSS e Infonavit) y buscamos maximizar la difusión de nuestros productos y servicios en redes sociales.</p>
+                            <p><b>Adicionalmente generamos ingresos fijos y crecientes con la incorporación de nuevos Socios.</b></p>
+                            <p>En la parte inferior, te damos acceso a varios menús para que puedas solicitar información relevante sobre tu situación actual en el IMSS, Infonavit y AFORE.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card text-back bg-light mb-3">
+                        <div class="card-header">Crea una nueva cuenta ahora</div>
+                        <div class="card-body">
+                            <img src="{% static 'img/pre-register.jpg' %}" height="153 vh" class="d-block w-100"
+                                alt="card_1" style="filter: grayscale(30%);">
+                            <br>
+                            <a href="{% url 'qr_register' %}" class="btn btn-secondary">Da clic aquí</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">Realiza tu simulación de pensión</div>
+                        <div class="card-body">
+                            <img src="{% static 'img/pension_card.jpg' %}" height="153 vh" class="d-block w-100"
+                                alt="card_2" style="filter: grayscale(30%);">
+                            <br>
+                            <a href="https://tspi.imss.gob.mx/serviciosperifericos-web/servicio/simularPension/inicio"
+                            class="btn btn-secondary" target="_blank">Da clic aquí</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">Solicita información</div>
+                        <div class="card-body">
+                            <img src="{% static 'img/info_card.png' %}" height="153 vh" width="153 vh" class="d-block"
+                                alt="card_3" style="display:block; margin:auto;">
+                            <br>
+                            <a href="{% url 'contact' %}" class="btn btn-secondary">Da clic aquí</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">Consulta Estado de Cuenta de tu AFORE.</div>
+                        <div class="card-body">
+                            <img src="{% static 'img/afore1.png' %}" height="153 vh" class="d-block w-100"
+                                alt="card_4" style="filter: grayscale(25%);">
+                            <br>
+                            <a href="https://www.e-sar.com.mx/PortalEsar/public/consultaAforeInicio.do" target="_blank" class="btn btn-secondary">Da clic aquí</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">Consulta tus semanas cotizadas</div>
+                        <div class="card-body">
+                            <img src="{% static 'img/stock/card_6.jpg' %}" height="177 vh" class="d-block w-100"
+                                alt="card_5" style="filter: grayscale(60%);">
+                            <br>
+                            <a href="https://www.gob.mx/tramites/ficha/constancia-de-semanas-reconocidas-en-el-imss/IMSS166"
+                            target="_self" class="btn btn-secondary">Da clic aquí</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">Consulta tu cuenta de infonavit para tu vivienda</div>
+                        <div class="card-body">
+                            <img src="{% static 'img/stock/card_7.jpg' %}" height="153 vh" class="d-block w-100"
+                                alt="card_6" style="filter: grayscale(30%);">
+                            <br>
+                            <a href="https://portalmx.infonavit.org.mx/wps/portal/infonavit.web/trabajadores/quiero-un-credito/!ut/p/z1/pZHBCoJAEIafpYNXZ1Yxtm4bmBURXkTbS2hsq6Cu6JavnyEdglyD5jYz_8f8MwMcEuB1-ihkqgtVp-WQn_ny4lDEYIPkFNAdRbb19_7q6DpBSCA2CiIC3ND23jxOBMPf-EmDf_Ke2f_s_uHIG9aLgRtHEJwRvE48N-QAXJYqG__J6sylEngrbqIVrX1vh3KuddOtLbSw73tbKiVLYV9VZeE3JFedhuRTCU0VDZFgEVYx7djiCcXw29c!/dz/d5/L2dBISEvZ0FBIS9nQSEh/"
+                            class="btn btn-secondary" target="_blank">Da clic aquí</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if services %}
+            <hr>
+            {% endif %}
+            <div class="row">
+                <!--Services card-->
+                {% for services in services %}
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card" data-aos="flip-right">
+                        <img id="services" src="{{services.image_service.url}}" class="card-img-top"
+                            alt="{{services.title}}">
+                        <div class="card-body">
+                            <h3 class="card-title">{{services.title}}</h3>
+                            <p class="card-text">{{services.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Mi información
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="alert alert-info" role="alert">
+                Atender problema de información
+            </div>
+            <hr>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{issue_user.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{issue_user.user.get_full_name}}</h6>
+                    {{issue_user.message}}
+                </div>
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-success btn-lg btn-block mb-2">Cerrar petición</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

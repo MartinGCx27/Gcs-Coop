@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Modalidad 40
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="col-lg-12 d-flex justify-content-center">
+        <h1 class="display-3">Modalidad 40 Ley 73</h1>.
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <img src="{% static 'img/mod_40_1.jfif' %}" class="img-fluid" alt="grandparents hugging" data-aos="fade-down-right">
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="jumbotron jumbotron-fluid" data-aos="zoom-out">
+                <div class="container" >
+                    <h3>1.- ¿Qué personas pertenecen a la ley 73?</h3>                        
+                        <p>Todas aquellas personas que se inscribieron por primera vez al IMSS antes de Julio de 1997. A partir de esta fecha les corresponde la ley 97.</p>
+                    <h3>2.- ¿Cuantas semanas debo tener para pensionarme en la modalidad 40?</h3>
+                        <p>Un mínimo de 500 Semanas Cotizadas.</p>
+                    <h3>3.- ¿A qué edad me puedo pensionar?</h3>                        
+                        <p>A partir de los 60 años.</p>
+                    <h3>4.- Si deje de cotizar en el IMSS y quiero reactivarme para la Modalidad 40, ¿Cuántas semanas necesito cotizar para estar activo?</h3>
+                        <p>52 Semanas</p>
+                    <h3>5.- ¿Qué beneficios tengo de jubilarme bajo Modalidad 40?</h3>                        
+                        <p>Te permite incrementar hasta el importe de 25 UMAS para ampliar el monto de tu pensión.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="jumbotron jumbotron-fluid d-none d-md-block" data-aos="zoom-in">
+                <div class="container" >
+                    <h3>6.- ¿Cómo se calcula mi pensión en Modalidad 40?</h3>                        
+                    <ul class="ul_mod_40_style">         
+                        <li><b>Invalidez:</b> Si la persona llegase a sufrir algún accidente y mediante la estimación de un médico legista del IMSS se podrá tener acceso a una pensión de invalidez parcial o permanente.</li>                         
+                        <li><b>Vejez:</b> Al cumplir los 65 años de edad y cotizar dentro de la modalidad 40 el beneficiario tendrá la opción de recibir una pensión al 100% de acuerdo a la edad y demás criterios aplicables.</li>
+                        <li><b>Cesantía en edad avanzada:</b> Cuando el cotizante tenga una edad de entre 60 a 64 años podrá realizar la baja de la modalidad 40 y ser beneficiario de una pensión desde el 75% al 95% de acuerdo a su edad y demás criterios aplicables.</li>
+                        <li><b>Muerte:</b> En caso de fallecimiento del asegurado y si éste deja beneficiarios legales como esposa o concubina, hijos menores de 18 años o padres que dependieran económicamente de él, éstos podrán acceder a una pensión de acuerdo al parentesco.</li>                                 
+                    </ul>     
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <img src="{% static 'img/mod_40_2.jfif' %}" class="img-fluid" alt="grandparents hugging" data-aos="fade-left">
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="jumbotron jumbotron-fluid d-block d-sm-none" data-aos="zoom-in">
+                <div class="container" >
+                    <h3>6.- ¿Cómo se calcula mi pensión en Modalidad 40?</h3>                        
+                    <ul class="ul_mod_40_style">         
+                        <li><b>Invalidez:</b> Si la persona llegase a sufrir algún accidente y mediante la estimación de un médico legista del IMSS se podrá tener acceso a una pensión de invalidez parcial o permanente.</li>                         
+                        <li><b>Vejez:</b> Al cumplir los 65 años de edad y cotizar dentro de la modalidad 40 el beneficiario tendrá la opción de recibir una pensión al 100% de acuerdo a la edad y demás criterios aplicables.</li>
+                        <li><b>Cesantía en edad avanzada:</b> Cuando el cotizante tenga una edad de entre 60 a 64 años podrá realizar la baja de la modalidad 40 y ser beneficiario de una pensión desde el 75% al 95% de acuerdo a su edad y demás criterios aplicables.</li>
+                        <li><b>Muerte:</b> En caso de fallecimiento del asegurado y si éste deja beneficiarios legales como esposa o concubina, hijos menores de 18 años o padres que dependieran económicamente de él, éstos podrán acceder a una pensión de acuerdo al parentesco.</li>                                 
+                    </ul>     
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <img src="{% static 'img/mod_40_3.jfif' %}" class="img-fluid" alt="grandparents hugging" data-aos="fade-up-right">
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="jumbotron jumbotron-fluid" data-aos="zoom-out">
+                <div class="container" >
+                    <h3>Porcentaje de pensión por edad de retiro:</h3>                        
+                    <table class="table table-striped" class="ul_style">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Edad</th>
+                            <th scope="col">Porcentaje</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>60 años</td>
+                              <td>75 %</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>60 años y 6 meses</td>
+                              <td>80 %</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>61 años y 6 meses</td>
+                              <td>85 %</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>62 años y 6 meses</td>
+                                <td>90 %</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>63 años y 6 meses</td>
+                                <td>95 %</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">6</th>
+                                <td>64 años y 6 meses</td>
+                                <td>100 %</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

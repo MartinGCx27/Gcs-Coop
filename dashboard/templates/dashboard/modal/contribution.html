@@ -1,0 +1,133 @@
+<div class="modal fade" id="modalcontribution" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Aportación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section id="datos_ingreso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item active" aria-current="page">Hola
+                                            {{request.user.get_full_name}}
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div id="salary" class="mt-4 alert alert-info" role="alert">
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                <div id="contribution_cost" class="mt-4 alert alert-info" role="alert">
+                                </div>
+                            </div>
+                        </div>
+                        <!--Mensaje sin datos de contratos-->
+                        <div id="alert_imss_validate" class="alert alert-warning mt-4" role="alert">
+                            <h4 class="alert-heading">No tienes la información necesaria</h4>
+                            <p>Al parecer no cuentas con la información necesaria para realizar un pago de aportación a GCS-COOP.</p>
+                            <p>Puedes completar los datos y generar tu documentación en <b>Mi perfil</b>, o dando clic <a href="{% url 'v_info_user' request.user.id %}">aquí</a></p>
+                            <small><b>También puedes ponerte en contacto con tu Supervisor Ascendente para solicitar una aclaración.</b></small>
+                        </div>
+                        <div id="validate_contract" class="alert alert-info" role="alert">
+                            Para poder realizar el pago correspondiente es necesario que completes los siguientes campos de <b>Tu perfil</b>:
+                            <div id="msg_contract_coop"></div>
+                            <div id="msg_contract_user"></div>
+                        </div>
+                        <!--Mensaje de direccionamiento exitoso-->
+                        <div id="alert_highway_contribution" class="alert alert-success mt-4" role="alert">
+                            <h4 class="alert-heading">¡Todo listo!</h4>
+                            <p>Si ya has realizado el pago de tu aportación, ya puedes dar clic en el botón <b>Cerrar</b> y continuar explorando todos los beneficios que GCS-COOP ofrece para ti.</p>
+                            <p>Si aún no conoces todos los beneficios puedes consultarlos dando clic <a href="{% url 'benefits' %}">aquí</a></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <a id="btn_highway_contribution" type="button" class="btn btn-primary" href="" target="_blank">Realizar
+                    pago único</a>
+                <a id="btn_highway_recurrent_contribution" type="button" class="btn btn-primary" href="" target="_blank">Inscribir
+                    pago recurrente</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function (){
+        var alert_highway_contribution = $('#alert_highway_contribution')
+        var alert_imss_validate = $('#alert_imss_validate')
+        var validate_contract = $('#validate_contract')
+        alert_highway_contribution.hide()
+        alert_imss_validate.hide()
+        validate_contract.hide()
+        
+    
+        $.ajax({
+            url: ' {% url "query_contribution" %} ',
+            type: 'GET',
+            dataType: 'json',
+            success:function(data){
+                // Validamos los datos de contratos
+                if(data.validate == true){
+                    var salary = document.getElementById('salary')
+                    var contribution_cost = document.getElementById('contribution_cost')
+                    salary.append( "Cotizas: ",data.cotization, " salarios minimos mensuales" )
+                    contribution_cost.append("Tu aportación correspondiente son: $",data.amount)
+
+                    jQuery('#contribution_cost').append('<br><small>El pago con tarjeta genera una comisión del 3%</small>')
+
+                    //contribution_cost.append('<small>El pago con tarjeta genera una comisión del 3%</small>')
+                    
+
+                    //btn_highway_contribution.setAttribute('href', data.link)
+                    $('#btn_highway_contribution').attr('href', data.link);
+                    $('#btn_highway_recurrent_contribution').attr('href', data.recurrent_link);
+                }
+                else{
+                    var user_salary = $('#salary')
+                    var user_cont = $('#contribution_cost')
+                    var btn_highway_contribution = $('#btn_highway_contribution')
+                    var btn_highway_recurrent_contribution = $('#btn_highway_recurrent_contribution')
+                    user_salary.hide()
+                    user_cont.hide()
+                    btn_highway_contribution.hide()
+                    btn_highway_recurrent_contribution.hide()
+
+                    var msg_contract_coop = $('#msg_contract_coop')
+                    var msg_user_coop = $('#msg_contract_user')
+
+                    if(data.msg_contract_coop != ''){
+                        msg_contract_coop.append("•)" + data.msg_contract_coop)
+                    }
+                    if(data.msg_contract_user != ''){
+                        msg_user_coop.append("•)" + data.msg_contract_user)
+                    }
+                    
+                    alert_imss_validate.show()
+                    validate_contract.show()
+                }
+            }
+        });
+
+        $('#btn_highway_contribution').on('click', function () {
+            alert_highway_contribution.show()
+        });
+        $('#btn_highway_recurrent_contribution').on('click', function () {
+            alert_highway_contribution.show()
+        });
+    });
+</script>

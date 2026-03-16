@@ -1,0 +1,42 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Mi información
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <div class="alert alert-info" role="alert">
+            Solicitudes de cambio de información
+        </div>
+        <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+            {% if issue_info %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Mensaje</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for issue_info in issue_info %}
+                            <tr>
+                                <td><a href="{% url 'update_info_issue' issue_info.id %}">{{issue_info.user.get_full_name}}</a></td>
+                                <td>{{issue_info.title}}</td>
+                                <td>{{issue_info.message}}</td>
+                                <td>{{issue_info.status_issue}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="mb-5">No hay información</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!-- Modal -->
+<div class="modal fade" id="passmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cambio de contraseña</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label>Contraseña</label>
+                            <input type="password" class="form-control" name="password" placeholder="Ingresa una nueva contraseña">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label>Repetir contraseña</label>
+                            <input type="password" class="form-control" name="password_2" placeholder="Ingresa nuevamente la contraseña">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button id="subpass" type="submit" class="btn btn-success">Cambiar</button>
+                </div>
+            </form>
+      </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    document.getElementById('subpass').disabled=true;
+    $(function(){
+        $('input[name="password"]').keyup(function(){
+            if ($('input[name="password"]') != '')
+                document.getElementById('subpass').disabled=false;
+        });
+    });
+    $(function(){
+        $('input[name="password_2"]').keyup(function(){
+            let pass_1 = $('input[name="password"]').val()
+            let pass_2 = $(this).val()
+            if(pass_1 != pass_2)
+                document.getElementById('subpass').disabled=true;
+            else
+                document.getElementById('subpass').disabled=false;
+        });
+    });
+</script>

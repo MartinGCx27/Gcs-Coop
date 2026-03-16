@@ -1,0 +1,67 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Proceso de venta
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    {% for category in category %}
+                        <h1 class="display-4">{{category.titulo}}</h1>
+                        <p class="lead">{{category.descripcion}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Formato</th>
+                                <th scope="col">Tutorial</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tutorials in tutorials %}
+                                <tr>
+                                    <th scope="row">{{tutorials.titulo}}</th>
+                                    <td>{{tutorials.descripcion}}</td>
+                                    {% if tutorials.files %}
+                                        <td><a href="{{tutorials.files.url}}" download="" class="btn btn-outline-success">Ver</a><br><small><span>{{tutorials.updated}}</span></small></td>
+                                    {% else %}
+                                        <td>-</td>
+                                    {% endif %}
+                                    {% if tutorials.video %}
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tuto-{{tutorials.id}}">
+                                                Ver
+                                            </button>
+                                        </td>
+                                    {% else %}
+                                        <td>-</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

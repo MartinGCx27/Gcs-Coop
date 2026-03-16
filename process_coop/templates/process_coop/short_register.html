@@ -1,0 +1,222 @@
+{% extends 'process_coop/base.html' %}
+{% load static %}
+
+{% block title %}
+Registro nuevo socio
+{% endblock %}
+
+{% block content %}
+<section id="short_register_1">
+  <div class="container mt-2">
+    <div class="row">
+      <div class="col">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">Registro de nuevo socio</h1>
+            <p class="lead">Captura la información con la que te identificará el sistema.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <form id="form" method="POST">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-6 col-12">
+              <label>Nombre(s)</label>
+              <input required type="text" class="form-control" name="user_form-first_name" autocomplete="off">
+            </div>
+            <div class="form-group col-md-6 col-12">
+              <label>Apellidos</label>
+              <input required type="text" class="form-control" name="user_form-last_name" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-lg-5">
+              <label>Fecha de nacimiento</label>
+              <input required name="general_form-date_of_birth" id="dateBirth" type="date" class="form-control"
+                placeholder="Selecciona la fecha" autocomplete="off">
+            </div>
+            <div class="col-lg-1">
+              <label>Edad</label>
+              <input required min="18" max="120" name="general_form-coop_age" id="coopAge" type="number"
+                class="form-control" autocomplete="off">
+            </div>
+            <div class="col-lg-6">
+              <label>Lugar de nacimiento</label>
+              {{better_form.general_form.place_of_birth}}
+            </div>
+          </div>
+          <hr>
+          <div class="alert alert-warning col-6" role="alert">
+            Tu NSS será tu usuario para entrar al sistema.
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 col-12">
+              <label>Número de seguro social (NSS)</label>
+              <input required id="username" type="number" onKeyPress="if(this.value.length==11) return false;"
+                class="form-control" name="user_form-username" autocomplete="off">
+              {% if better_form.user_form.username.errors %}
+              {{better_form.user_form.username.errors}}
+              {% endif %}
+            </div>
+            <div class="form-group col-md-6 col-12">
+              <label>Correo electrónico</label>
+              <input required type="email" class="form-control" name="user_form-email" autocomplete="off">
+            </div>
+            <div id="div1">
+            </div>
+          </div>
+          <hr>
+          <div class="form-row">
+            <div class="col-lg-6 col-md-6 col-12">
+              <label>Teléfono</label>
+              <input minlength="10" maxlength="10" name="contact_form-number" required type="number"
+                pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" class="form-control"
+                autocomplete="off">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+              <label>Tipo de teléfono</label>
+              {{better_form.contact_form.number_type}}
+            </div>
+          </div>
+          <hr>
+          <div class="alert alert-warning" role="alert">
+            Esta es una contraseña temporal, el socio la cambiará al inicar sesión.
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 col-12">
+              <label>Contraseña</label>
+              <input required type="password" class="form-control" name="user_form-password1" autocomplete="off">
+              {{better_form.user_form.password1.help_text}}
+            </div>
+            <div class="form-group col-md-6 col-12">
+              <label>Confirmar contraseña</label>
+              <input required type="password" class="form-control" name="user_form-password2" autocomplete="off">
+              {{better_form.user_form.password2.help_text}}
+            </div>
+            {% if better_form.user_form.password2.errors %}
+            <div class="alert alert-danger" role="alert">
+              {{better_form.user_form.password2.errors}}
+            </div>
+            {% endif %}
+          </div>
+          <button id="boton_submit" type="submit" class="btn btn-info btn-lg btn-block mb-3 mt-3">Crear cuenta</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+  // Calcular edad
+  $(function () {
+    $('input[name="general_form-date_of_birth"]').blur(function () {
+      let dateB = $(this).val();
+      var today = new Date();
+      var dateBirth = new Date(dateB);
+      var age = today.getFullYear() - dateBirth.getFullYear();
+      var m = today.getMonth() - dateBirth.getMonth();
+          if (m < 0 || (m === 0 && today.getDate() < dateBirth.getDate())) {
+            age--;
+          }
+          document.getElementById("coopAge").value = age;
+          $('input[id="coopAge"]').val(age);
+        });
+      });
+    
+      document.getElementById('boton_submit').disabled = true;
+      $(function () {
+        $('input[name="password1"]').keyup(function () {
+          if ($('input[name="password1"]') != '')
+            document.getElementById('boton_submit').disabled = false;
+        });
+      });
+
+      $(function () {
+        $('input[name="password2"]').keyup(function () {
+          let pass_1 = $('input[name="password1"]').val();
+          let pass_2 = $(this).val();
+          if (pass_1 != pass_2) {
+            document.getElementById('boton_submit').disabled = true;
+          }
+          else {
+            document.getElementById('boton_submit').disabled = false;
+          }
+
+          document.getElementById("coopAge").value = age;
+          $('input[id="coopAge"]').val(age);
+        });
+      });
+
+      // Validamos el NSS
+      $(function () {
+        $('input[name="user_form-username"]').blur(function () {
+          let nss = $(this).val()
+          $.ajax({
+            url: window.location.pathname,
+            type: 'POST',
+            data: {
+              'action': 'search_product_id',
+              'nss': nss
+            },
+            dataType: 'json'
+          }).done(function (data) {
+            $.each(data, function (key, value) {
+              alert('Ya existe un socio con ese NSS')
+              $('input[name="user_form-username"]').val('')
+              return false
+            });
+            return false
+          });
+        });
+      });
+
+      // Validamos los campos de password
+      document.getElementById('boton_submit').disabled = true;
+
+      $(function () {
+        $('input[name="user_form-password1"]').keyup(function () {
+          if ($('input[name="user_form-password1"]') != '')
+            document.getElementById('boton_submit').disabled = false;
+        });
+      });
+
+      $(function () {
+        $('input[name="user_form-password2"]').keyup(function () {
+          let pass_1 = $('input[name="user_form-password1"]').val();
+          let pass_2 = $(this).val();
+          if (pass_1 != pass_2) {
+            document.getElementById('boton_submit').disabled = true;
+          }
+          else {
+            document.getElementById('boton_submit').disabled = false;
+          }
+        });
+      });
+
+      // Creamos las reglas del validator
+      $("#form").validate({
+        rules: {
+          username: {
+            required: true,
+            minlength: 11,
+            maxlength: 11
+          }
+        },
+        messages: {
+          username: {
+            minlength: 'Captura al menos 11 caracteres',
+            maxlength: 'Captura máximo 11 caracteres'
+          }
+        }
+      });
+      
+
+</script>
+{% endblock %}

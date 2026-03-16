@@ -1,0 +1,653 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+información de usuario
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                {% if missing_tables %}
+                <div class="alert alert-danger" role="alert">
+                    Información de socio <span class="badge badge-danger ml-4"><big>Perfil incompleto</big></span>
+                </div>
+                <section id="progress_bar">
+                    <div class="container mb-3">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-info progress-bar-animated"
+                                 role="progressbar" aria-valuenow="{{info_complete}}" aria-valuemin="0"
+                                 aria-valuemax="{{REQUIRED_TABLES}}" style="width: {{profile_progress}}%"></div>
+                        </div>
+                        <span><small>Esta barra indica la completitud del perfil.</small></span>
+                    </div>
+                </section>
+                Llena la información de <span class="font-italic font-weight-bolder">{{missing_tables.0}}</span> para
+                descargar tus contratos 
+                {% else %}
+                    <div class="alert alert-success mb-0" role="alert">
+                    {% if validate_contracts.contracts_val %}
+                        Información de socio <span class="badge badge-info ml-4"><big>Perfil completo</big></span>
+                    </div>
+                    {% else%}
+                            Información de socio <span class="badge badge-info ml-4"><big>Perfil completo</big></span>
+                            <span class="ml-4"> Ahora puedes generar tu <span class="font-italic font-weight-bolder">{{validate_contracts.msg_contract_coop}}</span> {%if validate_contracts.msg_contract_coop %} {%if validate_contracts.msg_contract_user %} y {% endif %} {% endif %} <span class="font-italic font-weight-bolder">{{validate_contracts.msg_contract_user}}</span></span>
+                            <a href="{% url 'update_contract_user' id_user %}" class="badge badge-primary ml-2">Da click</a>
+                        </div>
+
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Información básica
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    <a href="{% url 'update_user' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Afiliado desde</th>
+                            <th scope="col">Estatus</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{user.first_name}}</td>
+                            <td>{{user.last_name}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.date_joined}}</td>
+                            {% if pmnt_status_user == '3' %}
+                            {% if request.user.is_staff %}
+                            <td><a href="{% url 'pmnt_validator' id_user %}"> <img src="{% static 'img/check.png' %}"
+                                                                                   alt="activo"> </a></td>
+                            {% else %}
+                            <td><img src="{% static 'img/check.png' %}" alt="activo"></td>
+                            {% endif %}
+                            {% else %}
+                            {% if request.user.is_staff %}
+                            <td><a href="{% url 'pmnt_validator' id_user %}"> <img src="{% static 'img/no_check.png' %}"
+                                                                                   alt="inactivo"> </a></td>
+                            {% else %}
+                            <td><img src="{% static 'img/no_check.png' %}" alt="inactivo"> </a> </td>
+                            {% endif %}
+                            {% endif %}
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Documentación
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if docu %}
+                    <a href="{% url 'update_documentation' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Identificación anverso</th>
+                            <th scope="col">Identificación reverso</th>
+                            <th scope="col">Comprobante de domicilio</th>
+                            <th scope="col">Acta de nacimiento</th>
+                            <th scope="col">CURP</th>
+                            <th scope="col">RFC</th>
+                            <th scope="col">Semanas cotizadas</th>
+                            <th scope="col">Contrato cooperativista</th>
+                            <th scope="col">Contrato de socio individual</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for docu in docu %}
+                        <tr>
+                            <td>
+                                {% if docu.identification %}
+                                <a href="{{docu.identification.url}}" target="_blank">Identificación</a>
+                                {% else %}
+                                No hay información
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if docu.identification_reverse %}
+                                <a href="{{docu.identification_reverse.url}}" target="_blank">Identificación reverso</a>
+                                {% else %}
+                                No hay información
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if docu.address_comp %}
+                                <a href="{{docu.address_comp.url}}" target="_blank">Comprobante de domicilio</a>
+                                {% else %}
+                                No hay información
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if docu.born_cert %}
+                                <a href="{{docu.born_cert.url}}" target="_blank">Acta de nacimiento</a>
+                                {% else %}
+                                No hay información
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if docu.curp %}
+                                <a href="{{docu.curp.url}}" target="_blank">CURP</a>
+                                {% else %}
+                                No hay información
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if docu.rfc %}
+                                <a href="{{docu.rfc.url}}" target="_blank">RFC</a>
+                                {% else %}
+                                No hay información
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if docu.cot_weeks %}
+                                <a href="{{docu.cot_weeks.url}}" target="_blank">Semanas cotizadas</a>
+                                {% else %}
+                                No hay información
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if docu.contract_coop %}
+                                <a href="{{docu.contract_coop.url}}" target="_blank">Contrato coop</a>
+                                {% else %}
+                                No hay información
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if docu.contract_user %}
+                                <a href="{{docu.contract_user.url}}" target="_blank">Contrato socio</a>
+                                {% else %}
+                                No hay información
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    No hay documentación
+                    <a href="{% url 'update_documentation' user.id %}" class="btn btn-outline-success mb-1">Crear
+                        registro</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Socios registrados por el socio
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if sons_info %}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">NSS</th>
+                            <th scope="col">Motivo afiliación</th>
+                            <th scope="col">Tipo afiliación</th>
+                            <th scope="col">Estatus</th>
+                            <th scope="col">Oficina</th>
+                            <th scope="col">Director</th>
+                            <th scope="col">Promotor ascendente</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for sons_info in sons_info %}
+                        <tr>
+                            <td><a href="{% url 'v_info_user' sons_info.user.id %}">{{sons_info.user.first_name}}</a>
+                            </td>
+                            <td>{{sons_info.user.last_name}}</td>
+                            <td>{{sons_info.user.username}}</td>
+                            <td>{{sons_info.affiliation_reason}}</td>
+                            <td>{{sons_info.affiliate_type}}</td>
+                            <td>{{sons_info.status_user}}</td>
+                            <td>{{sons_info.offices_list}}</td>
+                            <td>{{sons_info.ceo}}</td>
+                            <td>{{sons_info.upstream_promoter}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    No hay información
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Datos de Identificación
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if identify_info_user %}
+                    <a href="{% url 'update_identify' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">NSS</th>
+                            <th scope="col">Fecha de alta</th>
+                            <th scope="col">Tipo de usuario</th>
+                            <th scope="col">Motivo afiliación</th>
+                            <th scope="col">Tipo afiliación</th>
+                            <th scope="col">Estatus</th>
+                            <th scope="col">Oficina</th>
+                            <th scope="col">Director</th>
+                            <th scope="col">Promotor ascendente</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for identify_info_user in identify_info_user %}
+                        <tr>
+                            <td>{{identify_info_user.user}}</td>
+                            <td>{{identify_info_user.created}}</td>
+                            <td>{{identify_info_user.user_type}}</td>
+                            <td>{{identify_info_user.affiliation_reason}}</td>
+                            <td>{{identify_info_user.affiliate_type}}</td>
+                            <td>{{identify_info_user.status_user}}</td>
+                            <td>{{identify_info_user.offices_list}}</td>
+                            <td>{{identify_info_user.ceo}}</td>
+                            <td>{{identify_info_user.upstream_promoter}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    No hay información
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Información general
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if general_info %}
+                    <a href="{% url 'update_general_info' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Edad</th>
+                            <th scope="col">Lugar de nacimiento</th>
+                            <th scope="col">Fecha de nacimiento</th>
+                            <th scope="col">Nacionalidad</th>
+                            <th scope="col">CURP</th>
+                            <th scope="col">RFC</th>
+                            <th scope="col">Estado civil</th>
+                            <th scope="col">Regimen matrimonial</th>
+                            <th scope="col">Sexo</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for general_info in general_info %}
+                        <tr>
+                            <td>{{general_info.coop_age}}</td>
+                            <td>{{general_info.place_of_birth}}</td>
+                            <td>{{general_info.date_of_birth}}</td>
+                            <td>{{general_info.nationality}}</td>
+                            <td>{{general_info.curp}}</td>
+                            <td>{{general_info.rfc}}</td>
+                            <td>{{general_info.marital_status}}</td>
+                            <td>{{general_info.matrimonial_regime}}</td>
+                            <td>{{general_info.sex}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    No hay información
+                    <a href="{% url 'general_info' user.id %}" class="btn btn-outline-success mb-1">Crear registro</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Domicilio
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if address_info %}
+                    <a href="{% url 'update_address' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Municipio</th>
+                            <th scope="col">Colonia</th>
+                            <th scope="col">Código postal</th>
+                            <th scope="col">Calle</th>
+                            <th scope="col">No exterior</th>
+                            <th scope="col">No interior</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for address_info in address_info %}
+                        <tr>
+                            <td>{{address_info.suburb.state}}</td>
+                            <td>{{address_info.suburb.delegation}}</td>
+                            <td>{{address_info.suburb}}</td>
+                            <td>{{address_info.suburb.zip_code}}</td>
+                            <td>{{address_info.street}}</td>
+                            <td>{{address_info.ext_number}}</td>
+                            <td>{{address_info.int_number}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    No hay información
+                    <a href="{% url 'update_address' user.id %}" class="btn btn-outline-success mb-1">Crear registro</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Contacto
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if number_info %}
+                    <a href="{% url 'm_numbers' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Número</th>
+                            <th scope="col">Tipo de número</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for number_info in number_info %}
+                        <tr>
+                            <td>{{number_info.number}}</td>
+                            <td>{{number_info.number_type}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    No hay información
+                    <a href="{% url 'm_numbers' user.id %}" class="btn btn-outline-success mb-1">Crear registro</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Correos alternativos
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if altermail_info %}
+                    <a href="{% url 'update_alternative_emails' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Correo alternativo</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for altermail_info in altermail_info %}
+                        <tr>
+                            <td>{{altermail_info.alternative_email}}</td>
+                            <td>{{altermail_info.status}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    No hay información
+                    <a href="{% url 'alternative_emails' user.id %}" class="btn btn-outline-success mb-1">Crear
+                        registro</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Datos de IMSS
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if imss_info %}
+                    <a href="{% url 'update_imss_info' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Salario de cotización</th>
+                            <th scope="col">Aportación cooperativista</th>
+                            <th scope="col">Comisión cooperativista</th>
+                            <th scope="col">Fecha alta cooperativa</th>
+                            <th scope="col">Semanas cotizadas</th>
+                            <th scope="col">Estatus</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for imss_info in imss_info %}
+                        <tr>
+                            <td>{{imss_info.cotizacion_imss.salario_cot}}</td>
+                            <td>$ {{imss_info.cotizacion_imss.salario_cot.aport_coop|floatformat:"0"}}</td>
+                            <td>$ {{imss_info.cotizacion_imss.salario_cot.com_prom|floatformat:"0"}}</td>
+                            <td>{{imss_info.imss_register_date}}</td>
+                            <td>{{imss_info.coti_weeks}}</td>
+                            <td>{{imss_info.status_imss}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    No hay información
+                    <a href="{% url 'imss_info' user.id %}" class="btn btn-outline-success mb-1">Crear registro</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Actividad económica del socio
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if act_eco_info %}
+                    <a href="{% url 'm_economic_activity' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Actividad</th>
+                            <th scope="col">Tipo de actividad</th>
+                            <th scope="col">Descripción</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for act_eco_info in act_eco_info %}
+                        <tr>
+                            <td>{{act_eco_info.activity}}</td>
+                            <td>{{act_eco_info.activity_type}}</td>
+                            <td>{{act_eco_info.activity_description}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    No hay información
+                    <a href="{% url 'economic_act' user.id %}" class="btn btn-outline-success mb-1">Crear registro</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Dependientes económicos del socio
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if eco_dependent_info %}
+                    <a href="{% url 'm_economic_dependent' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido paterno</th>
+                            <th scope="col">Apellido materno</th>
+                            <th scope="col">Fecha de nacimiento</th>
+                            <th scope="col">Edad</th>
+                            <th scope="col">Actividad</th>
+                            <th scope="col">Parentesco</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for eco_dependent_info in eco_dependent_info %}
+                        <tr>
+                            <td>{{eco_dependent_info.name}}</td>
+                            <td>{{eco_dependent_info.ape_pat}}</td>
+                            <td>{{eco_dependent_info.ape_mat}}</td>
+                            <td>{{eco_dependent_info.birthdate}}</td>
+                            <td>{{eco_dependent_info.age}}</td>
+                            <td>{{eco_dependent_info.dependent_activity}}</td>
+                            <td>{{eco_dependent_info.relation}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    Sin dependientes económicos
+                    <a href="{% url 'economic_dependent' user.id %}" class="btn btn-outline-success mb-1">Crear
+                        registro</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Referencias personales
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if reference_info %}
+                    <a href="{% url 'm_update_references' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido paterno</th>
+                            <th scope="col">Apellido materno</th>
+                            <th scope="col">Tiempo de conocerlo</th>
+                            <th scope="col">Relación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for reference_info in reference_info %}
+                        <tr>
+                            <td>{{reference_info.name_ref}}</td>
+                            <td>{{reference_info.ape_pat_ref}}</td>
+                            <td>{{reference_info.ape_mat_ref}}</td>
+                            <td>{{reference_info.meet_time}} años</td>
+                            <td>{{reference_info.relation}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    Sin referencias personales
+                    <a href="{% url 'personal_reference' user.id %}" class="btn btn-outline-success mb-1">Crear
+                        registro</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info" role="alert">
+                    Datos de cobro de comisiones
+                </div>
+                <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                    {% if bnkrec_info %}
+                    <a href="{% url 'update_bnkrec' user.id %}" class="btn btn-outline-warning mb-1">Modificar
+                        información</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nombre de banco</th>
+                            <th scope="col">Tipo de cuenta</th>
+                            <th scope="col">Método de pago</th>
+                            <th scope="col">Número de tarjeta</th>
+                            <th scope="col">Titular</th>
+                            <th scope="col">CLABE</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for bnkrec_info in bnkrec_info %}
+                        <tr>
+                            <td>{{bnkrec_info.bnk_name}}</td>
+                            <td>{{bnkrec_info.account_type}}</td>
+                            <td>{{bnkrec_info.payment_method}}</td>
+                            <td>{{bnkrec_info.css_number}}</td>
+                            <td>{{bnkrec_info.css_name}}</td>
+                            <td>{{bnkrec_info.css_clave}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    No hay información
+                    <a href="{% url 'data_bnk_rec' user.id %}" class="btn btn-outline-success mb-1">Crear registro</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+<!--Popper-->
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script>
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    })
+
+</script>

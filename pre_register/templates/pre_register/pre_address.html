@@ -1,0 +1,144 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Dirección de socio
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Dirección del nuevo socio</h1>
+                      <p class="lead">Ingresa la dirección del nuevo socio, esta información es importante por lo que valida la información antes de ingresarla.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="."  enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label hidden>Nombre de usuario</label>
+                            <input hidden type="text" class="form-control" name="user" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-3">
+                            <label>Código postal</label>
+                            <input name="zipcode" type="text" class="form-control" placeholder="Ingresa el código postal" required autocomplete="off">
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Colonia</label>
+                            {{form.suburb}}
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Municipio</label>
+                            <select disabled name="delegation" class="form-control">
+                                <option value="">------------</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Estado</label>
+                            <select disabled name="state" class="form-control">
+                                <option value="">------------</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label>Calle</label>
+                            <input name="street" type="text" class="form-control" placeholder="Ingresa la calle" required autocomplete="off">
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Número exterior</label>
+                            <input name="ext_number" type="text" class="form-control" placeholder="Ingresa el número" required autocomplete="off">
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Número interior (Opcional)</label>
+                            <input name="int_number" type="text" class="form-control" placeholder="Ingresa el número" autocomplete="off">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Registrar</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-row">
+                        <div class="col">
+                            <a href="{% url 'pre_numbers_registration' user.id %}" class="btn btn-outline-warning btn-lg btn-block">Omitir</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(function (){
+        $('input[name="zipcode"]').blur(function () {
+            let zip_code = $(this).val();
+            var select_suburb = $('select[name="suburb"]');
+            var options = '<option value="">------------</option>'
+            $.ajax({
+                url: window.location.pathname,
+                type: 'POST',
+                data: {
+                    'action': 'search_product_id',
+                    'zip_code': zip_code
+                },
+                dataType: 'json'
+            }).done(function (data){
+                $.each(data, function(key, value){
+                    options += '<option value="'+value.id+'">'+value.suburb+'</option>'
+                });
+                return false
+            }).always(function(data){
+                select_suburb.html(options)
+            });
+        });
+    });
+    $(function (){
+        $('select[name="suburb"]').on('change', function (){
+            let suburb = $(this).val();
+            var select_del = $('select[name="delegation"]');
+            var option = '<option value="">------------</option>'
+            var select_sta = $('select[name="state"]');
+            var option_sta = '<option value="">------------</option>'
+            $.ajax({
+                url: window.location.pathname,
+                type: 'POST',
+                data: {
+                    'action_info': 'search_del_id',
+                    'suburb': suburb
+                },
+                dataType: 'json'
+            }).done(function (data_del){
+                $.each(data_del, function(key, value){
+                    option += '<option selected value="'+value.id+'">'+value.delegation+'</option>'
+                    option_sta += '<option selected value="'+value.id+'">'+value.state+'</option>'
+                });
+                return false
+            }).always(function(data_del){
+                select_del.html(option)
+                select_sta.html(option_sta)
+            });
+        });
+    })
+</script>
+{% endblock %}

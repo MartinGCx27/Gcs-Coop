@@ -1,0 +1,112 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+Payment Validator
+{% endblock %}
+
+{% block content %}
+<!--Enlace CSS Dropdown-->
+<link rel="stylesheet" href="{% static 'css/toggle.css' %}">
+
+<section>
+    <div class="row d-flex justify-content-center">
+        <div class="col">
+            {% if pmnt_session_flag <= 2 %}
+            <div class="alert alert-info" role="alert">
+                Activar usuario
+            </div>
+
+            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                <table class="table center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Estatus</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td>{{gen_info.first_name}}</td>
+                        <td>{{gen_info.last_name}}</td>
+                        <td>
+                            <div class="container-tgl">
+                                <label class="switch"><input name="switch" type="checkbox"/>
+                                    <div></div>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            {% else %}
+            <div class="alert alert-info" role="alert">
+                Desactivar usuario
+            </div>
+
+            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                <table class="table center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Estatus</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td>{{gen_info.first_name}}</td>
+                        <td>{{gen_info.last_name}}</td>
+                        <td>
+                            <div class="container-tgl">
+                                <label class="switch"> <input name="switch" type="checkbox" checked/>
+                                   <div></div>
+                               </label>
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(function (){
+        $('input[name="switch"]').on("change",function () {
+            if($(this).is(":checked"))
+                {
+                    var pmnt=true
+                }
+                else
+                {
+                    var pmnt=false
+                }
+            $.ajax({
+                url: window.location.pathname,
+                type: 'POST',
+                data: {
+                pmnt: pmnt,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                dataType: 'json'
+            }).done(function (data){
+            }).always(function(data){
+            });
+        });
+    });
+</script>
+
+{% endblock %}

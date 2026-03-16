@@ -1,0 +1,55 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Actualizar servicios
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label>Título</label>
+                            {{form.title}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label>Descripción</label>
+                            {{form.description}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-3">
+                            <label>Imágen</label>
+                            {{form.image_service}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-3">
+                            <label>Status</label>
+                            {{form.status}}
+                        </div>
+                    </div>
+                    <br>
+                    {{form.errors}}
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-warning btn-lg btn-block">Modificar</button>
+                        </div>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

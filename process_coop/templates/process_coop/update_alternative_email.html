@@ -1,0 +1,55 @@
+{% extends 'process_coop/base.html' %}
+{% load static %}
+
+{% block title %}
+    Modificar correo alternativo
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Correo alternativo</h1>
+                      <p class="lead">Agrega o modifica la información sobre el correo alternativo del usuario</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label hidden>Nombre de usuario</label>
+                            <input hidden type="text" class="form-control" name="user" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <label>Ingresa un correo alternativo</label>
+                            {{form.alternative_email}}
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <label>Status</label>
+                            {{form.status}}
+                        </div>
+                        <div class="col-lg-4 mt-4">
+                            <button type="submit" class="btn btn-outline-warning btn-lg btn-block">Modificar</button>
+                        </div>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

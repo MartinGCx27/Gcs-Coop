@@ -1,0 +1,145 @@
+{% extends 'process_coop/base.html' %}
+{% load static %}
+
+{% block title %}
+    Información general
+{% endblock %}
+
+{% block content %}
+<section id="general_info">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Información general</h1>
+                      <p class="lead">Aquí debes ingresar la información general del nuevo socio. Valida que la información sea correcta, si algún dato está erróneo, puedes modificarlo al terminar el proceso.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="progress_bar">
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+                  </div>
+                  <span><small>Esta barra indíca el progreso del trámite.</small></span>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="general_info">
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-primary" role="alert">
+                    Datos generales de socio cooperativista
+                </div>
+                {{forms.errors}}
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label hidden>Nombre de usuario</label>
+                            <input hidden type="text" class="form-control" name="user" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-5">
+                            <label>Fecha de nacimiento</label>
+                            <input required name="date_of_birth" id="dateBirth" type="date" class="form-control" placeholder="Selecciona la fecha" autocomplete="off">
+                        </div>
+                        <div class="col-lg-1">
+                            <label>Edad</label>
+                            <input required min="18" max="120" name="coop_age" id="coopAge" type="number" class="form-control" autocomplete="off">
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Lugar de nacimiento</label>
+                            {{form.place_of_birth}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-3">
+                            <label>Nacionalidad</label>
+                            {{form.nationality}}
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Estado Civil</label>
+                            {{form.marital_status}}
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Regimen matrimonial</label>
+                            {{form.matrimonial_regime}}
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Sexo</label>
+                            {{form.sex}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            <label>CURP</label>
+                            <input required minlength="18" maxlength="18" name="curp" type="text" class="form-control" placeholder="Ingresa el CURP" autocomplete="off">
+                            <a href="https://www.gob.mx/curp/" target="_blank"><small>Consulta tu CURP aquí</small></a>
+                        </div>
+                        <div class="col">
+                            <label>RFC</label>
+                            <input required minlength="13" maxlength="13" name="rfc" type="text" class="form-control" placeholder="Ingresa el RFC con homoclave" autocomplete="off">
+                            <a href="https://www.sat.gob.mx/aplicacion/operacion/31274/consulta-tu-clave-de-rfc-mediante-curp" target="_blank"><small>Consulta tu RFC aquí</small></a>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Registrar</button>
+                        </div>
+                    </div>
+                    {% if not val_preregister %}
+                    <hr>
+                    <div class="form-row">
+                        <div class="col">
+                            <a href="{% url 'address_registration' user.id %}" class="btn btn-outline-warning btn-lg btn-block">Omitir</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        $('select[name="marital_status"]').on('change', function(){
+            let id = $(this).val();
+            if(id == 1){
+                $('select[name="matrimonial_regime"]').val(4)
+            }
+        });
+    });
+
+    $(function () {
+        $('input[name="date_of_birth"]').blur (function(){
+            let dateB =$(this).val();
+            var today = new Date();
+            var dateBirth = new Date(dateB);
+            var age = today.getFullYear() - dateBirth.getFullYear();
+            var m = today.getMonth() - dateBirth.getMonth();
+            
+            if (m < 0 || (m === 0 && today.getDate() < dateBirth.getDate())) {
+                age--;
+            }
+            document.getElementById("coopAge").value = age;
+            $('input[id="coopAge"]').val(age);
+        });
+    });
+
+</script>
+{% endblock %}

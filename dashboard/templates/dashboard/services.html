@@ -1,0 +1,61 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Servicios
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Servicios de la cooperativa</h1>
+                      <p class="lead">Agrega o modifica los servicios que los clientes pueden observar en la página principal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="mt-2">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Servicios disponibles</li>
+                        <a class="ml-auto btn btn-outline-success" href="{% url 'create_service' %}">Crear nuevo</a>
+                    </ol>
+                </nav>
+                {% if services_list %}
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Imágen</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Actualizado</th>
+                        <th scope="col">Activo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for services_list in services_list %}
+                        <tr>
+                            <td><img style="width: 60px;" src="{{services_list.image_service.url}}" alt="service_pic"></td>
+                            <td><a href="{% url 'update_service' services_list.id %}">{{services_list.title}}</a></td>
+                            <td>{{services_list.description}}</td>
+                            <td>{{services_list.updated}}</td>
+                            <td>{{services_list.status}}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <div class="alert alert-warning" role="alert">
+                        No hay servicios disponibles
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

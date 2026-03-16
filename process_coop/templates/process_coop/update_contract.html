@@ -1,0 +1,83 @@
+{% extends 'process_coop/base.html' %}
+{% load static %}
+
+{% block title %}
+    Contratos de usuario
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Contratos de usuario</h1>
+                      <p class="lead">Descarga los contratos del usuario correspondientes al registro del socio. Los formatos deben ser firmados y escaneados para cargar en la siguiente ventana.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+                <div class="alert alert-primary" role="alert">
+                    Descarga los siguientes documentos
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <a href="/media/empty_contracts/{{file_name}}" class="btn btn-outline-dark" download="">Contrato cooperativista</a>
+            </div>
+            <div class="col">
+                <embed src="/media/empty_contracts/{{file_name}}" type="application/pdf" width="100%" height="600px"/>
+            </div>
+        </div>
+        <hr>
+        <div class="row mb-3">
+            <div class="col">
+                <a href="/media/empty_contracts/{{file_ind_name}}" class="btn btn-outline-dark" download="">Contrato socio industrial</a>
+            </div>
+            <div class="col">
+                <embed src="/media/empty_contracts/{{file_ind_name}}" type="application/pdf" width="100%" height="600px"/>
+            </div>
+        </div>
+        <hr>
+        <div class="row mb-3">
+            <div class="col">
+                <a href="/media/empty_contracts/{{file_card_name}}" class="btn btn-outline-dark" download="">Credencial de socio cooperativista</a>
+            </div>
+            <div class="col">
+                <embed src="/media/empty_contracts/{{file_card_name}}" type="application/pdf" width="100%" height="600px"/>
+            </div>
+        </div>
+        <hr>
+        <div class="row mb-3">
+            <div class="col">
+                <a href="/media/empty_contracts/{{letter_name}}" class="btn btn-outline-dark" download="">Carta de instrucción a BBVA</a>
+            </div>
+            <div class="col">
+                <embed src="/media/empty_contracts/{{letter_name}}" type="application/pdf" width="100%" height="600px"/>
+            </div>
+        </div>
+        <hr>
+        <div id="alert_highway_contribution" class="alert alert-warning mt-4" role="alert">
+            <p>Una vez firmados el contrato cooperativista y el contrato de socio comercial, no olvides cargarlos en la siguiente ventana</p>
+            <div class="row mb-3">
+                <div class="col">
+                    <a href="{% url 'update_documentation' user.id %}" class="btn btn-warning btn-lg btn-block">Avanzar</a>
+                </div>
+            </div>
+            <small>Si no los puedes cargar ahora, la carga estará disponible en cualquier momento a través de:</small>
+            <small>Mi perfil>Documentación>Modificar información</small>
+
+            
+        </div>
+        
+    </div>
+</section>
+{% endblock %}

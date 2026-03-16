@@ -1,0 +1,23 @@
+{% for tutorials in tutorials %}
+    <!-- Modal -->
+    <div class="modal fade" id="tuto-{{tutorials.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{tutorials.titulo}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <h5>{{tutorials.descripcion}}</h5>
+                <br>
+                <iframe src="{{tutorials.video}}/preview" width="640" height="480" allow="autoplay"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

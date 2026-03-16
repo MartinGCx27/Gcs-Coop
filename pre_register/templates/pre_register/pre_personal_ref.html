@@ -1,0 +1,116 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Referencias personales
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Referencias personales</h1>
+                      <p class="lead">Ingresa los datos correspondientes a las referencias personales del socio</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label hidden>Nombre de usuario</label>
+                            <input hidden type="text" class="form-control" name="user" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Nombre(s)</label>
+                            <input required type="text" class="form-control" name="name_ref" placeholder="Ingresa el nombre(s)" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Apellido paterno</label>
+                            <input required type="text" class="form-control" name="ape_pat_ref" placeholder="Ingresa el primer apellido" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Apellido materno</label>
+                            <input required type="text" class="form-control" name="ape_mat_ref" placeholder="Ingresa el segundo apellido" autocomplete="off">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Tiempo de conocerlo</label>
+                            <input required type="number" min="0" max="99" class="form-control" name="meet_time" placeholder="Ingrese el valor en años" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Número de contacto</label>
+                            <input required type="text" minlength="10" maxlength="10" class="form-control" name="num_contact" placeholder="Ingrese el número telefónico" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Relación</label>
+                            {{form.relation}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Registrar</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            {% if ref_data %}
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido paterno</th>
+                                        <th scope="col">Apellido materno</th>
+                                        <th scope="col">Número</th>
+                                        <th scope="col">Relación</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ref_data in ref_data %}
+                                        <tr>
+                                            <td>{{ref_data.name_ref}}</td>
+                                            <td>{{ref_data.ape_pat_ref}}</td>
+                                            <td>{{ref_data.ape_mat_ref}}</td>
+                                            <td>{{ref_data.num_contact}}</td>
+                                            <td>{{ref_data.relation}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <br>
+                                <a href="{% url 'pre_resumen' user.id %}" class="btn btn-success btn-lg btn-block">Avanzar</a>
+                                <br>
+                            {% else %}
+                                <div class="alert alert-danger" role="alert">
+                                    No hay referencias registradas
+                                </div>
+                                <div class="mb-3">
+                                    <a href="{% url 'pre_resumen' user.id %}" class="btn btn-outline-warning btn-lg btn-block">Omitir</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

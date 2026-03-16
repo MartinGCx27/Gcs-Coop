@@ -1,0 +1,81 @@
+/******Global configuration******/
+/*Titulos*/
+@font-face{
+    font-family: "bigcalson" !important;
+    font-style: normal;
+    src: local('C:/Users/Rubik/Documents/Proyectos/GCS_COOP/gcs_coop/gcs_coop/static/font/big-caslon/big-caslon.ttf');
+}
+h6,h5,h4,h3,h2,h1{
+    font-family: "bigcalson" !important;
+}
+h1{
+    font-size: 2.2rem;
+}
+h2{
+    font-size: 1.8rem;
+}
+h3{
+    font-size: 1.4rem;
+}
+
+/*Subtitulos*/
+
+
+/*Parrafos*/
+@font-face{
+    font-family: "BodoniNW" !important;
+    font-style: normal;
+    src: url("{% static 'font/bodoni_xt/BODONI_PROP.ttf' %}");
+}
+p{
+    font-family: "BodoniNW" !important;
+    font-size: 1.30em;
+}
+
+/*Lists with same font*/
+.ul_style{
+    font-family: "BodoniNW" !important;
+    font-size:  1.3rem !important;
+}
+
+.ul_mod_40_style{
+    font-family: "BodoniNW" !important;
+    font-size:  1.45rem !important;
+}
+
+.ul_style_of_pages{
+    font-family: "BodoniNW" !important;
+    font-size:  1.45rem !important;
+    align-items: center;
+    color: rgb(255, 255, 255);
+}
+
+
+/*Overlays*/
+.poverlay{
+    font-family: "BodoniNW";
+    font-size: 3.4vh;
+}
+
+/*Overlays titles*/
+#h1_overlay{
+    font-size: 7vh;
+    font-style: oblique;
+}
+
+#h3_overlay{
+    font-size: 5vh;
+    font-style:normal;
+}
+
+#h1_filosofy{
+    font-size: 9vh;
+}
+
+#p_filosofy{
+    font-size: 3.2vh;
+}
+
+.h3_pension_style{
+    font-size:  3.2vh !important;
+}

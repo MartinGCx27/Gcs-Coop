@@ -1,0 +1,88 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Números de contacto
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Teléfonos de contacto</h1>
+                      <p class="lead">Ingresa los teléfonos de contacto del nuevo socio. Estos serviran para contactar al socio en un futuro si es necesario brindarle mayor información.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label hidden>Nombre de usuario</label>
+                            <input hidden type="text" class="form-control" name="user" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <label>Teléfono</label>
+                            <input minlength="10" maxlength="10" name="number" required type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;"  class="form-control" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <label>Tipo de teléfono</label>
+                            {{form.number_type}}
+                        </div>
+                        <div class="col-lg-4 mt-4">
+                            <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Agregar</button>
+                        </div>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% if user_num %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Número</th>
+                                <th scope="col">Tipo de número</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user_number in user_num %}
+                            <tr>
+                                <td>{{user_number.number}}</td>
+                                <td>{{user_number.number_type}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <br>
+                    <a href="{% url 'pre_alternative_emails' user.id %}" class="btn btn-success btn-lg btn-block">Avanzar</a>
+                    <br>
+                {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        No hay números registrados
+                    </div>
+                    <div class="mb-3">
+                        <a href="{% url 'pre_alternative_emails' user.id %}" class="btn btn-outline-warning btn-lg btn-block">Omitir</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

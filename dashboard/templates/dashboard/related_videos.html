@@ -1,0 +1,114 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+   Videos relacionados
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="col-lg-12 d-flex justify-content-center">
+        <h1 class="display-4">Videos relacionados </h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <img src="{% static 'img/related_videos_2.jfif' %}" class="img-fluid" alt="Family cooking pizza" data-aos="fade-up-right">
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="jumbotron jumbotron-fluid" data-aos="zoom-out">
+                <div class="container" >
+                    <h3>Enlace videos relacionados: </h3>
+                    <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                      <table class="table table-striped" class="ul_style">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tema</th>
+                            <th scope="col">Enlace</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Cálculo de pensiones IMSS 2022:</td>
+                              <td><a href="https://www.youtube.com/watch?v=u36RUpFPJ1o" target="_blank">Visitar</a></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>Cálculo de pensión IMSS paso a paso:</td>
+                              <td><a href="https://www.youtube.com/watch?v=XU3BO-H_K2k" target="_blank">Visitar</a></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>Cálculo del salario promedio para tu pensión:</td>
+                              <td><a href="https://www.youtube.com/watch?v=PAiMIy7ZZSw" target="_blank">Visitar</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>Pensión por viudez: </td>
+                                <td><a href=" https://www.youtube.com/watch?v=PtvtIDBu2y8" target="_blank">Visitar</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>5 tips para tener una buena pensión: </td>
+                                <td><a href="https://www.youtube.com/watch?v=8gDHwj6KND4" target="_blank">Visitar</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">6</th>
+                                <td>¿A qué edad me conviene pensionarme? </td>
+                                <td><a href="https://www.youtube.com/watchv=PMLnzpsLoC8&list=PL7vIxWusw1cG9aVchVJnjo0cEUygm-V8s" target="_blank">Visitar</a></td>
+                            </tr>
+                        </tbody>
+                      </table> 
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="jumbotron jumbotron-fluid d-none d-md-block" data-aos="zoom-in">
+                    <div class="container">
+                        <h3>Modalidad 40</h3>                        
+                        <table class="table table-striped" class="ul_style">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tema</th>
+                                <th scope="col">Enlace</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>Información sobre modalidad  40:</td>
+                                  <td><a href="https://www.youtube.com/watch?v=qD5ZT0WpGPQ" target="_blank">Visitar</a></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">2</th>
+                                  <td>¿Me conviene pagar la modalidad 40?:</td>
+                                  <td><a href="https://www.youtube.com/watch?v=nPvocO6k0v4" target="_blank">Visitar</a></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">3</th>
+                                  <td>Modalidad 40, pensiones de hasta 50 mil pesos:</td>
+                                  <td><a href="https://www.youtube.com/watch?v=qD5ZT0WpGPQ" target="_blank">Visitar</a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Requisitos 2021 para la pensión del IMSS Ley 73:</td>
+                                    <td><a href=" https://www.youtube.com/watch?v=b4jrtMmLNC0 " target="_blank">Visitar</a></td>
+                                </tr>
+                            </tbody>
+                        </table>       
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <img src="{% static 'img/related_videos_1.jfif' %}" class="img-fluid" alt="Women and childrens in meadow" data-aos="fade-up-left">    
+        </div>
+    </div>
+{% endblock %}

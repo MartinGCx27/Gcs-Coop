@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Contrato de cooperativista</title>
+
+</head>
+<style>
+    *{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .title{
+        font-size: 13px;
+        text-align: center;
+    }
+    .parraf{
+        font-size: 10px;
+        text-align: justify;
+    }
+    .lists{
+        font-size: 10px;
+        text-align: left;
+    }
+    .firma{
+        text-decoration: overline;
+        margin-top: 80px;
+        text-align: center;
+    }
+    .name{
+        text-align: center;
+    }
+    .footer{
+        font-size: 12px;
+        text-align: center;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <p class="title">SOLICITUD DE INGRESO A LA SOCIEDAD COOPERATIVA DE CONSUMO</p>
+    <p class="parraf">El abajo suscrito, por mi propio derecho, en mi carácter de solicitante para ingresar a la Sociedad Cooperativa de Consumo “GCS PROTECCION Y BENEFICIO FAMILIAR” y a efecto de gozar de los derechos que confiere este carácter a partir del mes siguiente a aquel en que se presenta esta solicitud y declarando que la información que proporciono y se incluye en el mismo es correcta y cierta, por lo que autorizo a la sociedad de que se trata para verificar la veracidad de la misma y acepto que en caso de que la misma resultará falsa o inexacta quede automáticamente desechada la presente solicitud, manifiesto expresamente asumir las obligaciones que se precisan en los párrafos subsecuentes:</p>
+    <p class="title">OBLIGACIONES DEL SOLICITANTE</p>
+    <p class="parraf">1.-Aportar al momento de que se me comunique que se ha aceptado mi ingreso a la Sociedad, la cantidad de $5,000.00 (CINCO MIL PESOS 00/100 M.N.) por concepto de inscripción la cual únicamente podrá variar previa la solicitud que el suscrito dirija al Consejo de Administración y al Acuerdo de Asamblea que al efecto se emita, y posteriormente en forma mensual la aportación de $ {{data_imss}} ({{data_imss_letter}}) que será pagadera hasta el día 25 de cada mes, de conformidad con las Bases Constitutivas de la Cooperativa a las cuales manifiesto conocer en todo su contenido y alcance, por lo que quedo enterado desde este momento que de no cubrir por una sola vez la cantidad señalada en el término establecido y de acuerdo con las Bases referidas, seré automáticamente excluido de la misma, en la inteligencia de que  esta obligación subsistirá aun en el caso de que me encuentre incapacitado. </p>
+    <p class="parraf">2.- Depositar la cantidad correspondiente a mis aportaciones a la Cooperativa, únicamente en la Institución Bancaria, Sucursal y Cuenta que a continuación se indican:</p>
+    <ul class="lists">
+        <li><b>Para depositos directamente de BBVA</b></li>
+        <li>Nombre: GCS Protección y Beneficio Familiar S.C.C. de R.L. de C.V.</li>
+        <li>Convenio CIE pagos referenciados: 1812157</li>
+        <li>Referencia Número de Seguridad Social (NSS):{{nss}}</li>
+        <li></li>
+        <br>
+        <li><b>Para depósitos en otros bancos</b></li>
+        <li>Banco: BBVA</li>
+        <li>Nombre: GCS Protección y Beneficio Familiar S.C.C. de R.L. de C.V</li>
+        <li>CLABE Interbancario: 012180001163165223</li>
+        <li>Referencia o Concepto Número de Seguridad Social (NSS):{{nss}}</li>
+    </ul>
+    <br>
+    <ul class="lists">
+        <li><B>Nota: También se pueden realizar las aportaciones directamente en la página WEB www.gcs-coop.com.mx</B></li>
+        <li><b>Nota: No se deberá entregar las aportaciones en efectivo al asesor en ningún momento.</b></li>
+    </ul>
+    <p class="parraf">3.- Entregar copia del depósito a que se refiere el numeral que precede en el domicilio que me sea indicado en forma fehaciente para tal efecto, dentro de los cinco días posteriores al día en que debe realizarse el pago de la cantidad respectiva.</p>
+    <p class="parraf">4.- Una vez que se me comunique que se ha aceptado mi solicitud de ingreso como socio de la Cooperativa estoy de acuerdo en que mi segunda aportación deberé efectuarla dentro de los cinco días del mes siguiente a dicha aceptación, sin perjuicio de que mi ingreso se formalice en una Asamblea de socios posterior a este momento.</p>
+    <p class="parraf">5.- Aceptó expresamente que la relación que guarde con la Sociedad no implicará en ninguna forma ni momento una relación de trabajo con ella por lo que renuncio a intentar cualquier acción de la que pudiera derivar y/o fincársele cualquier responsabilidad en materia laboral, ya que mi calidad dentro de ella será la de socio cooperativista, en términos de la Ley General de Sociedades Mercantiles, de la Ley General de Sociedades Cooperativas y de las Bases Constitutivas de la Sociedad.</p>
+    <p class="parraf">6.- Igualmente manifiesto que no es de mi interés formar parte de ninguno de los órganos de la Cooperativa, tales como el de administración o el de vigilancia, ni de cualquier otro que se llegaré a integrar, para la debida administración, operación y funcionamiento de esta, renunciando expresamente a cualquier derecho que pudiera tener para estos efectos. </p>
+    <p class="parraf">7.- En este acto deslindo a la Sociedad Cooperativa de que se trata de cualquier adeudo que pudiera existir ante el INFONAVIT por créditos pasados o futuros, ya que no existe relación laboral con la primera. </p>
+    <p class="firma">Nombre y firma del solicitante</p>
+    <p class="name">{{full_name}}</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p class="title">DATOS PERSONALES DEL SOLICITANTE</p>
+    <table style="width: 80%;">
+        <tr>
+            <th>Solicitud de ingreso No. <br> {{id}}</th>
+            <th>Fecha <br> {{date_joined}}</th>
+        </tr>
+    </table>
+    <br>
+    <table style="width: 80%;">
+        <tr>
+            <th>Nombre de promotor <br> {{upstream}}</th>
+            <th>Número de seguridad social <br> {{nss}}</th>
+        </tr>
+    </table>
+    <br>
+    <p class="parraf">Importe de la aportación inicial, de la cual el presente documento hace las veces de recibo misma que será devuelta al solicitante si no es aceptado como socio de la cooperativa de consumo $5,000.00 (Cinco mil pesos 00/100 Moneda Nacional)</p>
+    <p class="title">DATOS PERSONALES DEL SOLICITANTE</p>
+    <table style="width: 80%;">
+        <tr>
+            <th>Apellidos del cooperativista<br> {{last_name}}</th>
+            <th>Nombre del cooperativista<br> {{first_name}}</th>
+            <th>Edad<br> {{age}} años</th>
+        </tr>
+    </table>
+    <br>
+    <table style="width: 80%;">
+        <tr>
+            <th>Lugar de nacimiento<br> {{place_birth}}</th>
+            <th>Fecha de nacimiento<br> {{date_birth}}</th>
+            <th>Nacionalidad<br> {{nationality}}</th>
+            <th>Estado civil<br> {{marri_status}}</th>
+        </tr>
+    </table>
+    <br>
+    <table style="width: 80%;">
+        <tr>
+            <th>CURP<br> {{curp}}</th>
+            <th>RFC<br> {{rfc}}</th>
+            <th>NSS<br> {{nss}}</th>
+            <th>Sexo<br> {{sex}}</th>
+        </tr>
+    </table>
+    <p class="title">DOMICILIO PARTICULAR DEL SOLICITANTE</p>
+    <table style="width: 80%;">
+        <tr>
+            <th>Calle y número<br> {{street_no}}</th>
+            <th>Colonia<br> {{suburb}}</th>
+            <th>Delegación y/o municipio<br> {{delegation}}</th>
+            <th>Ciudad o Estado<br> {{state}}</th>
+        </tr>
+    </table>
+    <br>
+    <table style="width: 80%;">
+        <tr>
+            <th>Números {% for numbers in numbers %}<br> {{numbers}}{% endfor %}</th>
+            <th>Correos {% for emails in emails %}<br> {{emails}}{% endfor %}</th>
+        </tr>
+    </table>
+    <p class="title">DEPENDIENTES ECONÓMICOS DEL SOLICITANTE</p>
+    {% if dependents %}
+        <table style="width: 80%;">
+            <tr>
+                <th>Nombre completo</th>
+                <th>Parentesco</th>
+                <th>Edad</th>
+            </tr>
+        </table>
+        <table style="width: 80%;">
+            {% for key in dependents %}
+                <tr>
+                    {% for k in key.values %}
+                        <th>{{k}}</th>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <table style="width: 80%;">
+            <tr>
+                <th>Sin dependientes económicos</th>
+            </tr>
+        </table>
+    {% endif %}
+    <p class="title">REFERENCIAS PERSONALES</p>
+    {% if references %}
+        <table style="width: 80%;">
+            <tr>
+                <th>Nombre completo</th>
+                <th>Teléfono</th>
+                <th>Tiempo de conocerlo (años)</th>
+            </tr>
+        </table>
+        <table style="width: 80%;">
+            {% for key in references %}
+                <tr>
+                    {% for k in key.values %}
+                        <th>{{k}}</th>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <table style="width: 80%;">
+            <tr>
+                <th>Sin dependientes económicos</th>
+            </tr>
+        </table>
+    {% endif %}
+    <p class="title">DATOS BANCARIOS</p>
+    {% if bank %}
+    <table style="width: 80%;">
+        <tr>
+            <th>Banco<br>{{bank}}</th>
+            {% if account %}
+            <th>Cuenta<br>{{account}}</th>
+            {% endif %}
+            {% if clave %}
+            <th>CLABE<br>{{clave}}</th>
+            {% endif %}
+            <th>Tipo de cuenta<br>{{type}}</th>
+        </tr>
+    </table>
+    {% else %}
+        <table style="width: 80%;">
+            <tr>
+                <th>Sin información bancaria</th>
+            </tr>
+        </table>
+    {% endif %}
+    <br>
+    <br>
+    <p class="firma">Nombre y firma del solicitante</p>
+    <p class="name">{{full_name}}</p>
+    <br>
+    <hr>
+    <p class="footer">GCS Protección y Beneficio Familiar, S.C. de C. de R.L. de C.V. Calle Paseo de Francia 155 Interior 205, Lomas Verdes III Sección, Naucalpan de Juárez, México. C.P. 53125. Tel: 55 5343 1606.</p>
+</body>
+</html>

@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Proceso de ingreso
+{% endblock %}
+
+{% block content %}
+<section id="process">
+    {% comment %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-12 step-card">
+                <div class="card text-white bg-secondary mb-3 materiald" data-aos="fade-up">
+                    <div class="card-body">
+                      <h3 class="card-title text-center"><b>Prepara tu documentación en un medio digital (USB, teléfono, correo o whatsapp)</b></h3>
+                      <p class="card-text">A. Identificación oficial vigente (INE, Pasaporte, Licencia o Cartilla Militar)</p>
+                      <p class="card-text">B. Comprobante de domicilio actualizado (Recibo de Telmex, Agua o CFE)</p>
+                      <p class="card-text">C. Acta de nacimiento </p>
+                      <p class="card-text">D. CURP</p>
+                      <p class="card-text">E. RFC (Constancia de situación fiscal) </p>
+                      <p class="card-text">F. Reporte de semanas cotizadas a la fecha de inscripción</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-12 step-card">
+                <div class="card bg-light mb-3 materiald" data-aos="fade-up">
+                    <div class="card-body">
+                      <h3 class="card-title text-center"><b>Realiza la captura de tu información en la oficina virtual con tu promotor </b></h3>
+                      <p class="card-text">A. Captura tu información general</p>
+                      <p class="card-text">B. Incorpora tu documentación a la página</p>
+                      <p class="card-text">C. Genera tu contrato cooperativista y contrato de socio</p>
+                      <p class="card-text">D. Genera tu tarjeta de identificación como socio comercial y la carta de instrucción a BBVA para la apertura de tu cuenta de débito</p>
+                      <p class="card-text">E. Imprime los contratos y firma en original</p>
+                      <p class="card-text">F. Entrega los contratos físicamente directamente en el domicilio de la empresa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-12 step-card">
+                <div class="card text-white bg-secondary mb-3 materiald" data-aos="fade-up">
+                    <div class="card-body">
+                      <h3 class="card-title text-center"><b>Realiza tu pago de inscripción</b></h3>
+                      <p class="card-text">El pago de inscripción incluye:</p>
+                      <p class="card-text">1. Tramite de registro en el imss e infonavit</p>
+                      <p class="card-text">2. Certificado socio cooperativista</p>
+                      <p class="card-text">3. Alta como promotor</p>
+                      <p class="card-text">4. Registro página web</p>
+                      <p class="card-text">5. Registro revista digital</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12 step-card">
+            <div id="last_step" class="card text-white bg-dark mb-3 materiald" data-aos="fade-up">
+                <div class="card-body">
+                  <h3 class="card-title text-center"><b>Ingreso a la empresa</b></h3>
+                  <p class="card-text">Al completar los pasos previstos, recibirás un correo de bienvenida con todos los accesos que tienes derecho como es la página de internet e intranet y la revista digital</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% endcomment %}
+
+
+    <div id="step1" class="container" data-aos="fade-down-right">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-12 mt-5 d-none d-sm-block">
+                <img src="{% static 'img/Texto_1.png' %}" class="img-fluid" alt="step1">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <img src="{% static 'img/Proceso_1.png' %}" class="img-fluid mb-3" alt="img_1" data-aos="zoom-out-up">
+            </div>
+            <div class="col-12 d-block d-sm-none" data-aos="fade-down-right">
+                <img src="{% static 'img/Texto_1.png' %}" class="img-fluid" alt="step1">
+            </div>
+        </div>
+    </div>
+    <div id="step2" class="container" data-aos="fade-down-left">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-12 mt-5">
+                <img src="{% static 'img/Proceso_2.png' %}" class="img-fluid mt-5" alt="step2">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <img src="{% static 'img/Texto_2.png' %}" class="img-fluid mt-5" alt="img_2" data-aos="zoom-out-up">
+            </div>
+        </div>
+    </div>
+    <div id="step3" class="container" data-aos="fade-down">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-12">
+                <img src="{% static 'img/Texto_3.png' %}" class="img-fluid mt-5" alt="step3">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <img src="{% static 'img/Proceso_3.png' %}" class="img-fluid mt-5" alt="img_3" data-aos="zoom-out-up">
+            </div>
+        </div>
+    </div>
+    <div id="step4" class="container" data-aos="fade-down-left">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-12 mt-5">
+                <img src="{% static 'img/Proceso_4.png' %}" class="img-fluid" alt="step4">
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <img src="{% static 'img/Texto_4.png' %}" class="img-fluid mt-5" alt="img_4" data-aos="zoom-out-up">
+            </div>
+        </div>
+    </div>
+
+
+</section>
+{% endblock %}

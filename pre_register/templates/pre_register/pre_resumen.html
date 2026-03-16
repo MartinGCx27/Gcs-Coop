@@ -1,0 +1,357 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Resumen de información
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Resumen de información</h1>
+                      <p class="lead">Valida la información capturada con el nuevo socio y finaliza el proceso de inscripción dando clic en el botón de <b>avanzar</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container mb-3">
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <b>Información del socio</b>
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellidos</th>
+                                            <th scope="col">Correo</th>
+                                            <th scope="col">NSS</th>
+                                            <th scope="col">Afiliado desde</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td>{{user.first_name}}</td>
+                                                <td>{{user.last_name}}</td>
+                                                <td>{{user.email}}</td>
+                                                <td>{{user.username}}</td>
+                                                <td>{{user.date_joined}}</td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <b>Información general</b>
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                {% if general_info %}
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Edad</th>
+                                                <th scope="col">Lugar de nacimiento</th>
+                                                <th scope="col">Fecha de nacimiento</th>
+                                                <th scope="col">Nacionalidad</th>
+                                                <th scope="col">CURP</th>
+                                                <th scope="col">RFC</th>
+                                                <th scope="col">Estado civil</th>
+                                                <th scope="col">Regimen matrimonial</th>
+                                                <th scope="col">Sexo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for general_info in general_info %}
+                                                <tr>
+                                                    <td>{{general_info.coop_age}}</td>
+                                                    <td>{{general_info.place_of_birth}}</td>
+                                                    <td>{{general_info.date_of_birth}}</td>
+                                                    <td>{{general_info.nationality}}</td>
+                                                    <td>{{general_info.curp}}</td>
+                                                    <td>{{general_info.rfc}}</td>
+                                                    <td>{{general_info.marital_status}}</td>
+                                                    <td>{{general_info.matrimonial_regime}}</td>
+                                                    <td>{{general_info.sex}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    No hay información
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <b>Dirección</b>
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                {% if address_info %}
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Municipio</th>
+                                                <th scope="col">Colonia</th>
+                                                <th scope="col">Código postal</th>
+                                                <th scope="col">Calle</th>
+                                                <th scope="col">No exterior</th>
+                                                <th scope="col">No interior</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for address_info in address_info %}
+                                                <tr>
+                                                    <td>{{address_info.suburb.state}}</td>
+                                                    <td>{{address_info.suburb.delegation}}</td>
+                                                    <td>{{address_info.suburb}}</td>
+                                                    <td>{{address_info.suburb.zip_code}}</td>
+                                                    <td>{{address_info.street}}</td>
+                                                    <td>{{address_info.ext_number}}</td>
+                                                    <td>{{address_info.int_number}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    No hay información
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <b>Contacto</b>
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                {% if number_info %}
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Número</th>
+                                            <th scope="col">Tipo de número</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for number_info in number_info %}
+                                            <tr>
+                                                <td>{{number_info.number}}</td>
+                                                <td>{{number_info.number_type}}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                    No hay información
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <b>Correo alternativo</b>
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                {% if altermail_info %}
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Correo alternativo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for altermail_info in altermail_info %}
+                                                <tr>
+                                                    <td>{{altermail_info.alternative_email}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    No hay información
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <b>Cotización del socio</b>
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                {% if imss_info %}
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Salario de cotización</th>
+                                                <th scope="col">Aportación cooperativista</th>
+                                                <th scope="col">Comisión cooperativista</th>
+                                                <th scope="col">Fecha alta cooperativa</th>
+                                                <th scope="col">Semanas cotizadas</th>
+                                                <th scope="col">Estatus</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for imss_info in imss_info %}
+                                                <tr>
+                                                    <td>{{imss_info.cotizacion_imss.salario_cot}}</td>
+                                                    <td>$ {{imss_info.cotizacion_imss.salario_cot.aport_coop}}</td>
+                                                    <td>$ {{imss_info.cotizacion_imss.salario_cot.com_prom}}</td>
+                                                    <td>{{imss_info.imss_register_date}}</td>
+                                                    <td>{{imss_info.coti_weeks}}</td>
+                                                    <td>{{imss_info.status_imss}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    No hay información
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <b>Actividad económica</b>
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                {% if act_eco_info %}
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Actividad</th>
+                                            <th scope="col">Tipo de actividad</th>
+                                            <th scope="col">Descripción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for act_eco_info in act_eco_info %}
+                                            <tr>
+                                                <td>{{act_eco_info.activity}}</td>
+                                                <td>{{act_eco_info.activity_type}}</td>
+                                                <td>{{act_eco_info.activity_description}}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                    No hay información
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <b>Información de comisiones</b>
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                {% if bnkrec_info %}
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Nombre de banco</th>
+                                        <th scope="col">Tipo de cuenta</th>
+                                        <th scope="col">Método de pago</th>
+                                        <th scope="col">Número de tarjeta</th>
+                                        <th scope="col">Titular</th>
+                                        <th scope="col">CLABE</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for bnkrec_info in bnkrec_info %}
+                                    <tr>
+                                        <td>{{bnkrec_info.bnk_name}}</td>
+                                        <td>{{bnkrec_info.account_type}}</td>
+                                        <td>{{bnkrec_info.payment_method}}</td>
+                                        <td>{{bnkrec_info.css_number}}</td>
+                                        <td>{{bnkrec_info.css_name}}</td>
+                                        <td>{{bnkrec_info.css_clave}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                    No hay información
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <b>Dependientes económicos</b>
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                {% if eco_dependent_info %}
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Apellido paterno</th>
+                                                <th scope="col">Apellido materno</th>
+                                                <th scope="col">Fecha de nacimiento</th>
+                                                <th scope="col">Edad</th>
+                                                <th scope="col">Actividad</th>
+                                                <th scope="col">Parentesco</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for eco_dependent_info in eco_dependent_info %}
+                                                <tr>
+                                                    <td>{{eco_dependent_info.name}}</td>
+                                                    <td>{{eco_dependent_info.ape_pat}}</td>
+                                                    <td>{{eco_dependent_info.ape_mat}}</td>
+                                                    <td>{{eco_dependent_info.birthdate}}</td>
+                                                    <td>{{eco_dependent_info.age}}</td>
+                                                    <td>{{eco_dependent_info.dependent_activity}}</td>
+                                                    <td>{{eco_dependent_info.relation}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    Sin dependientes económicos
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <b>Referencias personales</b>
+                            <div class="table-responsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                                {% if reference_info %}
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Apellido paterno</th>
+                                                <th scope="col">Apellido materno</th>
+                                                <th scope="col">Número</th>
+                                                <th scope="col">Tiempo de conocerlo</th>
+                                                <th scope="col">Relación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for reference_info in reference_info %}
+                                                <tr>
+                                                    <td>{{reference_info.name_ref}}</td>
+                                                    <td>{{reference_info.ape_pat_ref}}</td>
+                                                    <td>{{reference_info.ape_mat_ref}}</td>
+                                                    <td>{{reference_info.num_contact}}</td>
+                                                    <td>{{reference_info.meet_time}} años</td>
+                                                    <td>{{reference_info.relation}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    No hay información
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'dashboard' %}" class="btn btn-success btn-lg btn-block">Avanzar</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

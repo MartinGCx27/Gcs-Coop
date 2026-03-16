@@ -1,0 +1,48 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Crear servicios
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label>Título</label>
+                            <input required class="form-control" autocomplete="off" type="text" name="title">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label>Descripción</label>
+                            <textarea name="description" class="form-control" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-3">
+                            <label>Imágen</label>
+                            {{form.image_service}}
+                        </div>
+                    </div>
+                    <br>
+                    {{form.errors}}
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-success btn-lg btn-block">Agregar</button>
+                        </div>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

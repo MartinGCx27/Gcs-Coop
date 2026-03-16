@@ -1,0 +1,109 @@
+{% extends 'process_coop/base.html' %}
+{% load static %}
+
+{% block title %}
+    Modificar dependientes económicos
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Modificación de dependientes económicos</h1>
+                      <p class="lead">Modifica o agrega más información de dependientes económicos para el usuario.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-warning" role="alert">
+                    Registra nueva información del usuario
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label hidden>Nombre de usuario</label>
+                            <input hidden type="text" class="form-control" name="user" value="{{user.id}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Nombre(s) de dependiente</label>
+                            {{form.name}}
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Apellido paterno</label>
+                            {{form.ape_pat}}
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Apellido materno</label>
+                            {{form.ape_mat}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Fecha de nacimiento</label>
+                            <input required type="date" class="form-control" name="birthdate" autocomplete="off" value="{{instancia.birthdate|date:'Y-m-d'}}">
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Edad</label>
+                            {{form.age}}
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Parentesco</label>
+                            {{form.relation}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            <label>Actividad del dependiente</label>
+                            {{form.dependent_activity}}
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Status</label>
+                            {{form.status}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-warning btn-lg btn-block">Modificar</button>
+                        </div>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        $('input[name="birthdate"]').blur (function(){
+            let dateB =$(this).val();
+            var today = new Date();
+            var dateBirth = new Date(dateB);
+            var age = today.getFullYear() - dateBirth.getFullYear();
+            var m = today.getMonth() - dateBirth.getMonth();
+            
+            if (m < 0 || (m === 0 && today.getDate() < dateBirth.getDate())) {
+                age--;
+            }
+            document.getElementById("age").value = age;
+            $('input[id="age"]').val(age);
+        });
+    });
+</script>
+{% endblock %}
