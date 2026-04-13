@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web_legacy:
+    build: .
+    container_name: django_gcs_coop
+    restart: always
+    
+    # MUY IMPORTANTE: Esto permite que el contenedor use la red de tu servidor.
+    # Como tu settings.py apunta a 'localhost' para MySQL, esto hace que 
+    # el contenedor encuentre el MySQL que está instalado en tu VPS.
+    network_mode: "host"
+    
+    volumes:
+      # 1. Mapea el código de tu proyecto al contenedor
+      - .:/app
+      
+      # 2. Mapea los estáticos según tu settings.py (STATIC_ROOT apunta un nivel arriba del BASE_DIR)
+      - /home/webapps/gcs_coop/static:/static
+      
+      # 3. Mapea los archivos multimedia según lee tu Nginx
+      - /home/webapps/gcs_coop/media:/app/media

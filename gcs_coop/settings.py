@@ -120,8 +120,8 @@ DATABASES = {
        'NAME': 'gcscoop',
        'USER': 'root',
        'PASSWORD': 'QntmQw3rty#',
-       'HOST': 'localhost',
-       'PORT': ''
+       'HOST': '127.0.0.1',
+      'PORT': ''
     }
 }
 
